@@ -8,9 +8,14 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<%= content_tag :body, id: "#{controller.controller_name}" do %>
   <div class="container">
+    <div class="row">
+      <div class="span12">
+        <%= bootstrap_flash %>
+      </div>
+    </div>
     <%= yield %>
   </div>
-</body>
+<% end %>
 </html>

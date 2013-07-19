@@ -12,6 +12,35 @@
 @fontAwesomeTtfPath: asset-url("fontawesome-webfont.ttf");
 @fontAwesomeSvgPath: asset-url("fontawesome-webfont.svg#fontawesomeregular");
 
+@primaryBrandColor: #00a651;
+@green: @primaryBrandColor;
+@successText: @primaryBrandColor;
+
+@inputBackground: lighten(@primaryBrandColor, 50%);
+
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+.uneditable-input {
+  // Bootstrap doesn't allow you to tweak the input border highlight color.
+  &:focus {
+    border-color: rgba(0,166,81,.8);
+    .box-shadow(~"inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(0,166,81,.6)");
+  }
+}
+
 // Font Awesome
 @import "fontawesome/font-awesome";
 
