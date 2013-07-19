@@ -1,17 +1,25 @@
-<h2>Sign in</h2>
-
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, :autofocus => true %></div>
-
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
-
-  <% if devise_mapping.rememberable? -%>
-    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-  <% end -%>
-
-  <div><%= f.submit "Sign in" %></div>
+<%= content_for :header do %>
+	<h1 class="heading-lead text-success"><%= t 'messages.welcome_to_arrive' %></h1>
 <% end %>
 
-<%= render "devise/shared/links" %>
+<%= form_for :user, url: session_path(:user), html: { class: "sign-in form-horizontal text-left" } do |f| %>
+  <div class="control-group">
+    <%= f.label :email, class: "control-label" %>
+    <div class="controls">
+      <%= f.email_field :email, :autofocus => true %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :password, class: "control-label" %>
+    <div class="controls">
+      <%= f.password_field :password %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <div class="controls">
+      <%= f.submit "Log In", class: "btn btn-success btn-large" %>
+    </div>
+  </div>
+<% end %>

@@ -1,1 +1,10 @@
-<h1>You are logged in!</h1>
+<%= content_for :header do %>
+  <h1 class="heading-lead text-success">@ <%= current_user.school_name %></h1>
+<% end %>
+
+<div class="text-center">
+  <% if signed_in? %>
+    <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "btn" %>
+  <% end %>
+  <%= link_to "Some place", "https://google.com", class: "btn btn-success" %>
+</div>

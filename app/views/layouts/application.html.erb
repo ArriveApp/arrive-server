@@ -10,12 +10,18 @@
 </head>
 <%= content_tag :body, id: "#{controller.controller_name}" do %>
   <div class="container">
-    <div class="row">
-      <div class="span12">
+    <div class="row logo-header">
+      <div class="span8 offset2 text-center">
+        <%= image_tag "logo.png", class: "logo text-center" %>
+        <%= yield :header %>
         <%= bootstrap_flash %>
       </div>
     </div>
-    <%= yield %>
+    <div class="row">
+      <div class="span8 offset2">
+        <%= yield %>
+      </div>
+    </div>
   </div>
 <% end %>
 </html>
