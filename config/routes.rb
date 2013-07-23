@@ -6,6 +6,10 @@ ArriveServer::Application.routes.draw do
   # You can have the root of your site routed with "root"
   devise_scope :user do
     root to: "devise/sessions#new"
+
+    namespace :api do
+      resource :session, only: [:create]
+    end
   end
 
   get 'home' => 'home#index', as: :user_root
