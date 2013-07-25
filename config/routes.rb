@@ -1,5 +1,6 @@
 ArriveServer::Application.routes.draw do
   get "admin/index"
+  post 'admin/add'
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -14,6 +15,8 @@ ArriveServer::Application.routes.draw do
   end
 
   get 'home' => 'home#index', as: :user_root
+ 
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
