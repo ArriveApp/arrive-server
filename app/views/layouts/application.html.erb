@@ -11,10 +11,17 @@
 <%= content_tag :body, id: "#{controller.controller_name}" do %>
   <div class="container">
     <div class="row logo-header">
-      <div class="span8 offset2 text-center">
-        <%= image_tag "logo.png", class: "logo text-center" %>
+      <div class="span8 offset2 text-left">
+        <%= image_tag "logo.png", class: "logo text-left" %>
         <%= yield :header %>
         <%= bootstrap_flash %>
+        
+           <% if signed_in? %>
+           Welcome,
+           <%= current_user.username %>
+           <%= link_to "Logout?", destroy_user_session_path, method: :delete, class: "btn text-right log-out-button" %>
+            <% end %>
+   
       </div>
     </div>
     <div class="row">
