@@ -14,6 +14,8 @@ ArriveServer::Application.routes.draw do
     end
   end
 
+  resources :classes, only: :index
+
   get 'home' => 'home#index', as: :user_root
  
 
