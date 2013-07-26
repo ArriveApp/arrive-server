@@ -1,8 +1,9 @@
 <%= content_for :header do %>
-	<h1 class="heading-lead text-success"><%= t 'messages.welcome_to_arrive' %></h1>
+	<h3 class="heading-lead text-success heading-center"><%= t 'messages.welcome_to_arrive' %></h3>
 <% end %>
 
-<%= form_for :user, url: session_path(:user), html: { class: "sign-in form-horizontal text-left" } do |f| %>
+<h5 class='login-message'>Log in below to access the admin portal.</h5>
+<%= form_for :user, url: session_path(:user), html: { class: "sign-in form-horizontal" } do |f| %>
   <div class="control-group">
     <%= f.label :email, class: "control-label" %>
     <div class="controls">
@@ -23,3 +24,9 @@
     </div>
   </div>
 <% end %>
+
+<script>
+  jQuery(document).ready(function (){
+    jQuery('.logo').css('max-width', '400px');
+  });
+</script>

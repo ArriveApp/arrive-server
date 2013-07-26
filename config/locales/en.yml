@@ -23,7 +23,3 @@ en:
   messages:
     welcome_to_arrive: "Welcome to Arrive!"
 
-  helpers:
-    label:
-      user:
-        password: "PIN"

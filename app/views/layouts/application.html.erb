@@ -11,7 +11,7 @@
 <%= content_tag :body, id: "#{controller.controller_name}" do %>
   <div class="container">
     <div class="row logo-header">
-      <div class="span8 offset2 text-left">
+      <div class="span8 offset2">
         <%= image_tag "logo.png", class: "logo text-left" %>
         <%= yield :header %>
         <%= bootstrap_flash %>
