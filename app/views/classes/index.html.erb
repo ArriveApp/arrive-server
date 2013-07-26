@@ -1,1 +1,35 @@
-Classes
+<div class="text-center">
+ 	<h2 class="heading-lead nightingale_name">@ <%= current_user.school_name %></h2>
+</div>
+
+<div class="text-center">
+	<%= link_to "Dashboard", "/home", class: "btn" %>
+	<%= link_to "Reports", "/reports/index", class: "btn" %>
+  	<%= link_to "User Manangement", "/users/index", class: "btn" %>
+  	<%= link_to "Class Manangement", "/classes/index", class: "btn btn-success" %>
+</div>
+<br>
+<br>
+<br>
+
+
+<div class="text-center">
+	<%= form_for :classes, url: classes_path do |f| %>
+		<% if local_assigns.has_key? :error? %>
+			<%= error %>
+		<% end %>
+		<p>
+			<label>Class:</label>
+			<%= f.text_field :name%>
+		</p>
+
+		<p>
+			<%= f.submit :class=> "btn", :value=> "Save Class"   %>
+		</p>
+	<% end %>
+</div>
+
+<% @all_classes.each do |c| %>
+	<p><%= c.name %></p>
+<% end %>
+

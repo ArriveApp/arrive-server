@@ -1,6 +1,10 @@
 ArriveServer::Application.routes.draw do
+  get "reports/index"
+  get "users/index"
   get "admin/index"
   post 'admin/add'
+  get "classes/index"
+  post "classes" => "classes#create"
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
