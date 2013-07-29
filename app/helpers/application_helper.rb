@@ -1,9 +1,9 @@
 module ApplicationHelper
-  def render_header_for(selected_button)
-    render partial: 'common/header', locals: {selected_button: selected_button}
+  def header_button_class_for(page_identifier)
+    @_active_page == page_identifier ? 'btn btn-success' : 'btn'
   end
 
-  def header_button_class(selected_button, this_button)
-    selected_button == this_button ? 'btn btn-success' : 'btn'
+  def active_page_is(active_page)
+    @_active_page = active_page
   end
 end
