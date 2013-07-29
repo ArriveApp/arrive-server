@@ -2,12 +2,8 @@
  	<h2 class="heading-lead nightingale_name">@ <%= current_user.school_name %></h2>
 </div>
 
-<div class="text-center">
-	<%= link_to "Dashboard", "/home", class: "btn" %>
-	<%= link_to "Reports", "/reports/index", class: "btn" %>
-  	<%= link_to "User Manangement", "/users/index", class: "btn" %>
-  	<%= link_to "Class Manangement", "/classes/index", class: "btn btn-success" %>
-</div>
+<%= render_header_for :class_management %>
+
 <br>
 <br>
 <br>
