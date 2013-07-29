@@ -1,3 +1,4 @@
 class Classes < ActiveRecord::Base
-	validate :name, presence: true, length: { minimum: 1 }
+	validates :name,  presence: true,
+                    length: {minimum: 1, allow_blank: true}
 end

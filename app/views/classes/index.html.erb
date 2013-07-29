@@ -1,5 +1,5 @@
-<div class="text-center">
- 	<h2 class="heading-lead nightingale_name">@ <%= current_user.school_name %></h2>
+<div class='text-center'>
+ 	<h2 class='heading-lead nightingale_name'>@ <%= current_user.school_name %></h2>
 </div>
 
 <%= render_header_for :class_management %>
@@ -8,24 +8,24 @@
 <br>
 <br>
 
+<div class='text-center'>
+  <%= form_for @classes, url: classes_path do |f| %>
+      <div>
+         <% @classes.errors.full_messages.each do |error_message| %>
+            <div><%= error_message %></div>
+        <% end %>
+      </div>
 
-<div class="text-center">
-	<%= form_for :classes, url: classes_path do |f| %>
-		<% if local_assigns.has_key? :error? %>
-			<%= error %>
-		<% end %>
-		<p>
-			<label>Class:</label>
-			<%= f.text_field :name%>
-		</p>
-
-		<p>
-			<%= f.submit :class=> "btn", :value=> "Save Class"   %>
-		</p>
-	<% end %>
+      <div>
+        <%= f.label :name, 'Class:' %>
+        <%= f.text_field :name %>
+      </div>
+      <div>
+        <%= f.submit class: 'btn', value: 'Save Class' %>
+      </div>
+  <% end %>
 </div>
 
-<% @all_classes.each do |c| %>
-	<p><%= c.name %></p>
+<% @all_classes.each do |classes| %>
+    <p><%= classes.name %></p>
 <% end %>
-
