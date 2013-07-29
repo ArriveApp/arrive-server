@@ -1,14 +1,10 @@
 <% active_page_is :class_management %>
 
-<br>
-<br>
-<br>
-
 <div class='text-center'>
   <%= form_for @classes, url: classes_path do |f| %>
       <div>
          <% @classes.errors.full_messages.each do |error_message| %>
-            <div><%= error_message %></div>
+            <div class='text-error'><%= error_message %></div>
         <% end %>
       </div>
 
@@ -16,6 +12,7 @@
         <%= f.label :name, 'Class:' %>
         <%= f.text_field :name %>
       </div>
+
       <div>
         <%= f.submit class: 'btn', value: 'Save Class' %>
       </div>

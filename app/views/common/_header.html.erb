@@ -1,12 +1,21 @@
+<div>
+  <%= image_tag 'logo.png', class: 'logo text-left' %>
+
+  <% if signed_in? %>
+      Welcome, <%= current_user.username %>
+      <%= link_to 'Logout?', destroy_user_session_path, method: :delete, class: 'btn text-right' %>
+
+      <h2 class='text-center heading-lead school-name'>@ <%= current_user.school_name %></h2>
+  <% else %>
+      <h2 class="text-center heading-lead text-success"><%= t 'messages.welcome_to_arrive' %></h2>
+  <% end %>
+</div>
+
 <% if signed_in? %>
-    <div class="text-center">
-      <h2 class="heading-lead nightingale_name">@ <%= current_user.school_name %></h2>
+    <div class='text-center'>
+      <%= link_to 'Dashboard', root_path, class: header_button_class_for(:dashboard) %>
+      <%= link_to 'Reports', reports_path, class: header_button_class_for(:reports) %>
+      <%= link_to 'User Management', users_path, class: header_button_class_for(:user_management) %>
+      <%= link_to 'Class Management', classes_path, class: header_button_class_for(:class_management) %>
     </div>
 <% end %>
-
-<div class='text-center'>
-  <%= link_to 'Dashboard', root_path, class: header_button_class_for(:dashboard) %>
-  <%= link_to 'Reports', reports_path, class: header_button_class_for(:reports) %>
-  <%= link_to 'User Management', users_path, class: header_button_class_for(:user_management) %>
-  <%= link_to 'Class Management', classes_path, class: header_button_class_for(:class_management) %>
-</div>

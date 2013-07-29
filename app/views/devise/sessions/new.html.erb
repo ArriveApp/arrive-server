@@ -1,8 +1,5 @@
-<%= content_for :header do %>
-	<h3 class="heading-lead text-success heading-center"><%= t 'messages.welcome_to_arrive' %></h3>
-<% end %>
-
 <h5 class='login-message'>Log in below to access the admin portal.</h5>
+
 <%= form_for :user, url: session_path(:user), html: { class: "sign-in form-horizontal" } do |f| %>
   <div class="control-group">
     <%= f.label :email, class: "control-label" %>
