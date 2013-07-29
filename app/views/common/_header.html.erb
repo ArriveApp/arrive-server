@@ -1,10 +1,12 @@
-<div class="text-center">
-  <h2 class="heading-lead nightingale_name">@ <%= current_user.school_name %></h2>
-</div>
+<% if signed_in? %>
+    <div class="text-center">
+      <h2 class="heading-lead nightingale_name">@ <%= current_user.school_name %></h2>
+    </div>
+<% end %>
 
 <div class='text-center'>
-  <%= link_to 'Dashboard', '/home', class: header_button_class_for(:dashboard) %>
-  <%= link_to 'Reports', '/reports/index', class: header_button_class_for(:reports) %>
-  <%= link_to 'User Management', '/users/index', class: header_button_class_for(:user_management) %>
+  <%= link_to 'Dashboard', root_path, class: header_button_class_for(:dashboard) %>
+  <%= link_to 'Reports', reports_path, class: header_button_class_for(:reports) %>
+  <%= link_to 'User Management', users_path, class: header_button_class_for(:user_management) %>
   <%= link_to 'Class Management', classes_path, class: header_button_class_for(:class_management) %>
 </div>

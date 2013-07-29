@@ -1,26 +1,19 @@
 ArriveServer::Application.routes.draw do
-  get "reports/index"
-  get "users/index"
   get "admin/index"
   post 'admin/add'
 
   devise_for :users
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
   devise_scope :user do
-    root to: "devise/sessions#new"
-
     namespace :api do
       resource :session, only: [:create]
     end
   end
 
   resources :classes, only: [:index, :create]
+  resources :reports, only: :index
+  resources :users, only: :index
 
-  get 'home' => 'home#index', as: :user_root
- 
+  root to: 'home#index'
 
 
   # Example of regular route:

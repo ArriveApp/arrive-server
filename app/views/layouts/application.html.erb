@@ -13,8 +13,6 @@
     <div class="row logo-header">
       <div class="span8 offset2">
         <%= image_tag "logo.png", class: "logo text-left" %>
-        <%= yield :header %>
-        <%= bootstrap_flash %>
 
         <% if signed_in? %>
             Welcome, <%= current_user.username %>
@@ -23,9 +21,11 @@
 
       </div>
     </div>
+
     <div class="row">
       <div class="span8 offset2">
         <%= render 'common/header' %>
+        <%= bootstrap_flash %>
         <%= yield %>
       </div>
     </div>
