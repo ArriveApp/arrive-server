@@ -10,10 +10,9 @@ class ClassesController < ApplicationController
   	@classes = Classes.new(name: params[:classes][:name])
   		
   	if @classes.save
-  		Rails.logger.info("Saved class with name: '#{@classes.name}'")
   		redirect_to classes_path
   	else
-      Rails.logger.info("Attempt to save class with name: '#{@classes.name}' failed.")
+      logger.info("Attempt to save class with name: '#{@classes.name}' failed.")
 
       @all_classes = Classes.all
       render :index
