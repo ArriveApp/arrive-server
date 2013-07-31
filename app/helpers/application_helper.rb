@@ -6,4 +6,9 @@ module ApplicationHelper
   def active_page_is(active_page)
     @_active_page = active_page
   end
+
+  def todays_date_formatted
+    Date.today.strftime('%m-%d-%Y')
+  end
+
 end
