@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ClassesController do
+describe CoursesController do
   before do
     stub_sign_in
   end
@@ -16,23 +16,23 @@ describe ClassesController do
 
   describe '#create' do
     before do
-      Classes.stub(:new) { stub_class }
+      Course.stub(:new) { stub_class }
     end
 
-    let(:stub_class) { double(Classes, name: 'Class double') }
+    let(:stub_class) { double(Course, name: 'Class double') }
 
     it 'redirects to index when successful' do
       stub_class.stub(:save) { true }
 
-      post :create, classes: {name: 'Math'}
+      post :create, course: {name: 'Math'}
 
-      expect(response).to redirect_to classes_path
+      expect(response).to redirect_to courses_path
     end
 
     it 'renders the index when unsuccessful' do
       stub_class.stub(:save) { false }
 
-      post :create, classes: {name: ''}
+      post :create, course: {name: ''}
 
       expect(response).to render_template :index
     end

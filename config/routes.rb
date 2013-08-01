@@ -9,7 +9,7 @@ ArriveServer::Application.routes.draw do
     end
   end
 
-  resources :classes, only: [:index, :create]
+  resources :courses, only: [:index, :create]
   resources :reports, only: :index
   resources :users, only: :index
 
