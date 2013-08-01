@@ -17,10 +17,10 @@ Dev Machine Setup
 
   * Homebrew Install.
 
-          >brew install postgresql
+          brew install postgresql
           initdb /usr/local/var/postgres -E utf8
 
-          >To start database:
+          To start database:
           pg_ctl -D /usr/local/var/postgres -l logfile start
 
   * Standalone Homebrew install. This is the easiest option. Google for Postgres app, download, use.
