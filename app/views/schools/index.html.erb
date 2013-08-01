@@ -1,0 +1,24 @@
+<% active_page_is :school_management %>
+
+<div class='text-center'>
+  <%= form_for @school, url: schools_path do |f| %>
+      <div>
+         <% @school.errors.full_messages.each do |error_message| %>
+            <div class='text-error'><%= error_message %></div>
+        <% end %>
+      </div>
+
+      <div>
+        <%= f.label :name, 'School:' %>
+        <%= f.text_field :name %>
+      </div>
+
+      <div>
+        <%= f.submit class: 'btn', value: 'Add School' %>
+      </div>
+  <% end %>
+</div>
+
+<% @all_schools.each do |school| %>
+    <p><%= school.name %></p>
+<% end %>

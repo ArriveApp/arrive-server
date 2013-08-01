@@ -12,6 +12,7 @@ ArriveServer::Application.routes.draw do
   resources :courses, only: [:index, :create]
   resources :reports, only: :index
   resources :users, only: :index
+  resources :schools, only: [:index, :create]
 
   root to: 'home#index'
 
