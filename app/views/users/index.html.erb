@@ -1,2 +1,49 @@
 <% active_page_is :user_management %>
 
+    <%= form_for :user, url: session_path(:user), html: { class: "add-student form-horizontal text-left" } do |f| %>
+
+      <div class="control-group">
+        <%= f.label :firstname, class: "control-label" %>
+        <div class="controls">
+          <%= f.text_field :email, :autofocus => true %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= f.label :lastname, class: "control-label" %>
+        <div class="controls">
+          <%= f.text_field :lastname %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= f.label :username, class: "control-label" %>
+        <div class="controls">
+          <%= f.text_field :username %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= f.label :email, class: "control-label" %>
+        <div class="controls">
+          <%= f.email_field :email %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= f.label :pin, class: "control-label" %>
+        <div class="controls">
+          <%= f.password_field :password %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <div class="controls">
+          <%= f.submit "Add", class: "btn btn-success btn-large" %>
+        </div>
+      </div>
+</div>
+    <% end %>
+
+  </div>
+</div>
