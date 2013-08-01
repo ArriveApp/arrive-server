@@ -1,9 +1,7 @@
 require 'spec_helper'
 
 describe Course do
-
-  let(:school) { FactoryGirl.build(:school) }
-  let(:course) { FactoryGirl.build(:course, school: school) }
+  let(:course) { FactoryGirl.build(:course) }
 
   subject { course }
 
@@ -19,10 +17,6 @@ describe Course do
     let(:course) { FactoryGirl.build(:course, name: nil) }
 
     it { should_not be_valid }
-  end
-
-  context 'associations' do
-    its(:school) { should == school }
   end
 end
 
