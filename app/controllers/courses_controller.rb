@@ -7,13 +7,12 @@ class CoursesController < ApplicationController
   end
 
   def create
-  	@course = Course.new(name: params[:course][:name])
-  		
+  	@course = Course.new(name: params[:course][:name], school: current_user.school)
+
   	if @course.save
   		redirect_to courses_path
   	else
       logger.info("Attempt to save course with name: '#{@course.name}' failed.")
-
       @all_courses = Course.all
       render :index
   	end

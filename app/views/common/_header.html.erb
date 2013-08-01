@@ -5,7 +5,7 @@
       Welcome, <%= current_user.username %>
       <%= link_to 'Logout?', destroy_user_session_path, method: :delete, class: 'btn text-right' %>
 
-      <h2 class='text-center heading-lead school-name'>@ <%= current_user.school_name %></h2>
+      <h2 class='text-center heading-lead school-name'>@ <%= current_user.school.name %></h2>
   <% else %>
       <h2 class="text-center heading-lead text-success"><%= t 'messages.welcome_to_arrive' %></h2>
   <% end %>

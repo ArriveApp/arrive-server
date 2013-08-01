@@ -19,7 +19,7 @@ describe CoursesController do
       Course.stub(:new) { stub_class }
     end
 
-    let(:stub_class) { double(Course, name: 'Class double') }
+    let(:stub_class) { double(Course, name: 'Class double', school: 'school') }
 
     it 'redirects to index when successful' do
       stub_class.stub(:save) { true }
@@ -35,6 +35,25 @@ describe CoursesController do
       post :create, course: {name: ''}
 
       expect(response).to render_template :index
+    end
+
+    it 'creates the course with the current users school' do
+      stub_class.stub(:save) { true }
+
+      Course.should_receive(:new).with(hash_including(school: controller.current_user.school)).and_return(stub_class)
+      stub_class.should_receive(:save)
+
+      post :create, course: {name: 'Math'}
+    end
+
+    it 'creates the course with the supplied course name' do
+      stub_class.stub(:save) { true }
+      course_name = 'Math'
+
+      Course.should_receive(:new).with(hash_including(name: course_name)).and_return(stub_class)
+      stub_class.should_receive(:save)
+
+      post :create, course: {name: course_name}
     end
 
   end
