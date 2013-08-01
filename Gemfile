@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+
 ruby '2.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -28,13 +29,17 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'devise'
 
+gem 'pry'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
 end
 
-group :development, :test do
+group :test do
   gem 'rspec-rails', '~> 2.0'
+  gem 'factory_girl_rails'
+  gem 'database_cleaner'
 end
 
 # Use ActiveModel has_secure_password
