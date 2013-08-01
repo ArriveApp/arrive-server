@@ -12,4 +12,10 @@
     <input class="span2" size="16" type="text" value="<%=todays_date_formatted %>" />
     <span class="add-on"><i class="icon-th"></i></span>
   </div>
+
+  <div>
+    <% CheckIn.all.each do |check_in| %>
+        <%=check_in.user.username %> -- <%=check_in.course.name %> -- <%=check_in.created_at %>
+    <% end %>
+  </div>
 </div>
