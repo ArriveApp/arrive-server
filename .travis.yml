@@ -3,7 +3,8 @@ rvm:
 - 2.0.0
 deploy:
   provider: heroku
-  app: arrive-server-dev
-env:
-  global:
-    secure: SsNUU2SC+Ez+PDqzOTLUTyDhiER8N+lGK5qakbK/RKRYrQhJJ0XvuOGLUFI15Bk2hV+D1guBMLAo548B83htxUP1DsLv4Iuh6AlefSwplzA+a3oUEHVk+rq+EceqwZORqoDxuao5oc2AbpKuWYtodN9PwllouAi8ISx1D+4Uq2A=
+  api_key:
+    secure: U3f0j87+Vh5zgr4KK+w+8A4U37ACGn3ul18czXU/Uoloiv/WUi9PMBpX+TyoyIAwtdSSZWZSBuU5pOiF5L4NhfdAK1Bgo4SqsUTPLHQay/4MQSClBK3qP5zdOpRXG8VEbApLYabs5hJAH2lkGo379BzzsATAlkyrurqTucLOu1Y=
+  app: arrive-server
+  on:
+    repo: ArriveApp/arrive-server
