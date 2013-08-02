@@ -1,8 +1,9 @@
 language: ruby
 rvm:
-  - 2.0.0
+- 2.0.0
 deploy:
   provider: heroku
   app: arrive-server-dev
-     secure: "lWzMdsv9iDsCz8AWjyGxDp6vlxLLh6grV5CAnCYnZQXHkiu7KT2zjH9PKxSBfe6iNJO9Vtzf5VJydfWUdBitTFnyCBA4Mr7Oq+exjDTWynI0UtoMRmreJ8FuWlEvfleIrOc2I++erKDsQWkeJxDZeZ5vWxJ+YZijraliUF/ceOU="
-
+env:
+  global:
+    secure: SsNUU2SC+Ez+PDqzOTLUTyDhiER8N+lGK5qakbK/RKRYrQhJJ0XvuOGLUFI15Bk2hV+D1guBMLAo548B83htxUP1DsLv4Iuh6AlefSwplzA+a3oUEHVk+rq+EceqwZORqoDxuao5oc2AbpKuWYtodN9PwllouAi8ISx1D+4Uq2A=
