@@ -7,4 +7,8 @@ module ApplicationHelper
     @_active_page = active_page
   end
 
+  def error_messages object
+    object.errors.messages.values.flatten
+  end
+
 end

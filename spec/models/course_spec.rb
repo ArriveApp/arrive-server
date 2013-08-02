@@ -11,6 +11,11 @@ describe Course do
     let(:course) { FactoryGirl.build(:course, name: "") }
 
     it { should_not be_valid }
+
+    it "should render the appropriate error message" do
+      course.valid?
+      course.errors.messages[:name].should include 'Please enter a Course Name before you click Submit.'
+    end
   end
 
   context 'when name is nil' do

@@ -2,11 +2,7 @@
 
 <div class='text-center'>
   <%= form_for @school, url: schools_path do |f| %>
-      <div>
-         <% @school.errors.full_messages.each do |error_message| %>
-            <div class='text-error'><%= error_message %></div>
-        <% end %>
-      </div>
+      <%= render partial: 'shared/errors', locals: { model: @school } %>
 
       <div>
         <%= f.label :name, 'School:' %>

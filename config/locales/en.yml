@@ -23,3 +23,13 @@ en:
   messages:
     welcome_to_arrive: "Welcome to Arrive!"
 
+  activerecord:
+    errors:
+      models:
+        course:
+          blank: Please enter a %{model} %{attribute} before you click Submit.
+          attributes:
+            name:
+              taken: You have already added this %{model} to the database!
+        school:
+          blank: Please enter a %{model} %{attribute} before you click Submit.
