@@ -19,4 +19,8 @@ class SchoolsController < ApplicationController
   	end
   end
 
+  def get
+    render :json => School.all
+  end
+
 end
