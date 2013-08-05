@@ -3,14 +3,14 @@ class UsersController < ApplicationController
   	@newuser = User.create
   end
   def create
-  	@newuser = User.create(name: params[:email][:school_id][:username][:password][:password_confirmation][:firstname][:lastname])
-  	if @newuser.save
+  	@newuser = User.new(firstname: params[:user][:firstname], lastname: params[:user][:lastname], email: params[:user][:email], password: params[:user][:password], :school => current_user.school)
+    if @newuser.save
   		puts @newuser
   		logger.error @newuser
-  		redirect_to users_path
+  		redirect_to users_path, notice: "user created"
   	else
-  		logger.info("Failed to create user #{@newuser.name}")
-  		redirect_to users_path
+  		logger.info("Failed to create user #{@newuser.firstname}")
+  		redirect_to users_path, alert: "failed to create user"
   	end
   end
 end

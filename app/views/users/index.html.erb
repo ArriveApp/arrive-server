@@ -1,11 +1,11 @@
 <% active_page_is :user_management %>
 
-    <%= form_for :user, url: session_path(:user), html: { class: "add-student form-horizontal text-left" } do |f| %>
-
+<div class='text-center'>
+    <%= form_for :user, url: users_path do |f| %>
       <div class="control-group">
         <%= f.label :firstname, class: "control-label" %>
         <div class="controls">
-          <%= f.text_field :email, :autofocus => true %>
+          <%= f.text_field :firstname, :autofocus => true %>
         </div>
       </div>
 
@@ -13,13 +13,6 @@
         <%= f.label :lastname, class: "control-label" %>
         <div class="controls">
           <%= f.text_field :lastname %>
-        </div>
-      </div>
-
-      <div class="control-group">
-        <%= f.label :username, class: "control-label" %>
-        <div class="controls">
-          <%= f.text_field :username %>
         </div>
       </div>
 
@@ -42,8 +35,5 @@
           <%= f.submit "Add", class: "btn btn-success btn-large" %>
         </div>
       </div>
-</div>
     <% end %>
-
-  </div>
 </div>
