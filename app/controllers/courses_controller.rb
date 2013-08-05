@@ -3,7 +3,7 @@ class CoursesController < ApplicationController
 
   def index
     @course = Course.new
-    @all_courses = Course.all
+    @all_courses = Course.joins(:school).where(school_id: current_user.school)
   end
 
   def create
