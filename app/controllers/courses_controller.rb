@@ -18,4 +18,10 @@ class CoursesController < ApplicationController
   	end
   end
 
+  def courses_for_school
+    @school_id = params[:id]
+    schools_courses = Course.joins(:school).where(school_id: @school_id)
+    render :json => schools_courses
+  end
+
 end

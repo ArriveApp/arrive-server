@@ -18,5 +18,7 @@ ArriveServer::Application.routes.draw do
 
   root to: 'home#index'
 
+  get 'schools/all', to: 'schools#get'
+  get 'courses/:id', to: 'courses#courses_for_school'
 
 end
