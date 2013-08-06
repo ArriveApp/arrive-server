@@ -24,4 +24,9 @@ class CoursesController < ApplicationController
     render :json => schools_courses
   end
 
+  def get
+    render :json => Course.all
+  end
+
 end
+
