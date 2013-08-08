@@ -13,6 +13,10 @@ describe CoursesController do
   end
 
   describe '#index' do
+    before do
+      Course.stub(:new)
+    end
+
     it 'is a success' do
       get :index, school_id: school_id
 
@@ -22,11 +26,10 @@ describe CoursesController do
   end
 
   describe '#create' do
-    let(:courses) { double(ActiveRecord::Relation) }
-    let(:course) { double(Course, name: 'Class double', school: 'school') }
+    let(:course) { double(Course, name: 'Class double').as_null_object }
 
     before do
-      courses.stub(:build) { course }
+      Course.stub(:new) { course }
     end
 
     it 'redirects to index when successful' do
@@ -46,9 +49,7 @@ describe CoursesController do
     end
 
     it 'creates the course with the current users school' do
-      course.stub(:save) { true }
-
-      courses.should_receive(:build).with(name: 'Math')
+      Course.should_receive(:new).with(name: 'Math', school_id: school_id)
 
       post :create, school_id: school_id, course: {name: 'Math'}
     end
