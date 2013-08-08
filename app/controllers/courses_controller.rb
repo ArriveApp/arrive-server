@@ -5,25 +5,28 @@ class CoursesController < ApplicationController
   respond_to :json, only: :index
 
   def index
-    school = School.find(params[:school_id])
+    @school = School.find(params[:school_id])
 
-    @course = Course.new(school_id: school.id)
-    @courses = school.courses
+    @course = Course.new(school: @school)
+    @courses = @school.courses
 
     respond_with(@courses)
   end
 
   def create
-    school = School.find(params[:school_id])
+    school_id = params[:school_id]
 
-    @course = school.courses.build(name: params[:course][:name])
+    @course = Course.new(name: params[:course][:name], school_id: school_id)
 
   	if @course.save
-  		redirect_to school_courses_path(school_id: school.id)
+  		redirect_to school_courses_path(school_id: school_id), notice: 'Course was created successfully'
   	else
       logger.info("Attempt to save course with name: '#{@course.name}' failed.")
 
-      @courses = school.courses
+      @school = School.find(school_id)
+      @courses = @school.courses
+
+      flash.now[:alert] = 'Failed to create a course'
       render :index
   	end
   end
