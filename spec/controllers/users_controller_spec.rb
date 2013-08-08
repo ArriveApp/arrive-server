@@ -3,7 +3,7 @@ require 'spec_helper'
 describe UsersController do
 
 
-  describe "GET 'new'" do
+  describe "GET 'index'" do
     before do
       stub_sign_in
 
@@ -12,7 +12,7 @@ describe UsersController do
     end
 
     it "returns http success" do
-      get 'new', school_id: '1'
+      get 'index', school_id: '1'
 
       expect(response).to be_succes
     end
