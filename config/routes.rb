@@ -9,6 +9,10 @@ ArriveServer::Application.routes.draw do
     end
   end
 
+  namespace :api do
+    resources :schools, only: :index
+  end
+
   resources :reports, only: :index do
     post :search, on: :collection
   end
