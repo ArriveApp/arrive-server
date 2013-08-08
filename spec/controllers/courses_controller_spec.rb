@@ -1,13 +1,24 @@
 require 'spec_helper'
 
 describe CoursesController do
+  let(:school_id) { '1' }
+  let(:school) { double(School, id: school_id) }
+  let(:courses) { [] }
+
   before do
     stub_sign_in
+
+    School.stub(:find) { school }
+    school.stub(:courses) { courses }
   end
 
   describe '#index' do
+    before do
+      Course.stub(:new)
+    end
+
     it 'is a success' do
-      get :index
+      get :index, school_id: school_id
 
       expect(response).to be_success
     end
@@ -15,45 +26,32 @@ describe CoursesController do
   end
 
   describe '#create' do
+    let(:course) { double(Course, name: 'Class double').as_null_object }
+
     before do
-      Course.stub(:new) { stub_class }
+      Course.stub(:new) { course }
     end
 
-    let(:stub_class) { double(Course, name: 'Class double', school: 'school') }
-
     it 'redirects to index when successful' do
-      stub_class.stub(:save) { true }
+      course.stub(:save) { true }
 
-      post :create, course: {name: 'Math'}
+      post :create, school_id: school_id, course: {name: 'Math'}
 
-      expect(response).to redirect_to courses_path
+      expect(response).to redirect_to school_courses_path(school_id: school_id)
     end
 
     it 'renders the index when unsuccessful' do
-      stub_class.stub(:save) { false }
+      course.stub(:save) { false }
 
-      post :create, course: {name: ''}
+      post :create, school_id: school_id, course: {name: ''}
 
       expect(response).to render_template :index
     end
 
     it 'creates the course with the current users school' do
-      stub_class.stub(:save) { true }
+      Course.should_receive(:new).with(name: 'Math', school_id: school_id)
 
-      Course.should_receive(:new).with(hash_including(school: controller.current_user.school)).and_return(stub_class)
-      stub_class.should_receive(:save)
-
-      post :create, course: {name: 'Math'}
-    end
-
-    it 'creates the course with the supplied course name' do
-      stub_class.stub(:save) { true }
-      course_name = 'Math'
-
-      Course.should_receive(:new).with(hash_including(name: course_name)).and_return(stub_class)
-      stub_class.should_receive(:save)
-
-      post :create, course: {name: course_name}
+      post :create, school_id: school_id, course: {name: 'Math'}
     end
 
   end

@@ -3,4 +3,5 @@ class School < ActiveRecord::Base
                     length: { minimum: 1, allow_blank: true }
 
   has_many :courses
+  has_many :users
 end
