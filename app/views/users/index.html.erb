@@ -1,51 +1,69 @@
 <% active_page_is :user_management %>
 
 <div class='text-center'>
-    <%= form_for [@school, @user] do |f| %>
-      <%= render partial: 'shared/errors', locals: { model: @user } %>
+  <%= form_for [@school, @user] do |f| %>
+    <%= render partial: 'shared/errors', locals: { model: @user } %>
 
-      <div class="control-group">
-        <%= f.label :firstname, class: "control-label" %>
-        <div class="controls">
-          <%= f.text_field :firstname, :autofocus => true %>
-        </div>
+    <div class="control-group">
+      <%= f.label :firstname, class: "control-label" %>
+      <div class="controls">
+        <%= f.text_field :firstname, :autofocus => true %>
       </div>
+    </div>
 
-      <div class="control-group">
-        <%= f.label :lastname, class: "control-label" %>
-        <div class="controls">
-          <%= f.text_field :lastname %>
-        </div>
+    <div class="control-group">
+      <%= f.label :lastname, class: "control-label" %>
+      <div class="controls">
+        <%= f.text_field :lastname %>
       </div>
+    </div>
 
-      <div class="control-group">
-        <%= f.label :email, class: "control-label" %>
-        <div class="controls">
-          <%= f.email_field :email %>
-        </div>
+    <div class="control-group">
+      <%= f.label :email, class: "control-label" %>
+      <div class="controls">
+        <%= f.email_field :email %>
       </div>
+    </div>
 
-      <div class="control-group">
-        <%= f.label :pin, class: "control-label" %>
-        <div class="controls">
-          <%= f.password_field :password %>
-        </div>
+    <div class="control-group">
+      <%= f.label :pin, class: "control-label" %>
+      <div class="controls">
+        <%= f.password_field :password %>
       </div>
+    </div>
 
-      <div class="control-group">
-        <%= f.label :is_teacher %>
-        <div class="controls">
-          <%= f.check_box :is_teacher %>
-        </div>
+    <div class="control-group">
+      <%= f.label :is_teacher %>
+      <div class="controls">
+        <%= f.check_box :is_teacher %>
       </div>
+    </div>
 
-      <div class="control-group">
-        <div class="controls">
-          <%= f.submit "Add", class: "btn btn-success btn-large" %>
-        </div>
+    <div class="control-group">
+      <div class="controls">
+        <%= f.submit "Add", class: "btn btn-success btn-large" %>
       </div>
-    <% end %>
+    </div>
+  <% end %>
+  
+  <%= form_tag bulk_add_school_users_path(@school), :multipart => true do %>
+    <div class="control-group">
+      <div class="controls">
+        <%= file_field_tag :file, title: "Select file to upload" %>
+      </div>
+    </div>
+    
+    <div class="control-group">
+      <div class="controls">
+        <%= submit_tag "Bulk upload users", class: "btn btn-success btn-large" %>
+      </div>
+    </div>
+  <% end %>
+  
   <% @users.each do |user| %>
     <%= user.firstname %><br>
   <% end %>
 </div>
+<%= javascript_tag do %>
+  $(function() { $('input[type=file]').bootstrapFileInput(); });
+<% end %>

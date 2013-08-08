@@ -19,7 +19,12 @@ ArriveServer::Application.routes.draw do
 
   resources :schools, only: [:index, :create] do
     resources :courses, only: [:index, :create]
-    resources :users, only: [:index, :create]
+    resources :users, only: [:index, :create] do
+      collection do
+        post :bulk_add
+      end
+  end
+
   end
 
   root to: 'home#index'

@@ -1,3 +1,5 @@
+require 'csv'
+
 class UsersController < ApplicationController
   before_filter :authenticate_user!
 
@@ -9,22 +11,26 @@ class UsersController < ApplicationController
   end
 
   def create
+    params.permit!
+    @user = User.create!(params[:user].merge(school_id: params[:school_id]))
+    redirect_to school_users_path(school_id: params[:school_id]), notice: "User was created successfully."
+  rescue
+    logger.info("Failed to create user!")
 
-    user_params = params[:user]
-    school_id = params[:school_id]
+    @school = School.find(params[:school_id])
+    @users = @school.users
 
-    @user = User.new(firstname: params[:user][:firstname], lastname: params[:user][:lastname], email: params[:user][:email], password: params[:user][:password], :school => current_user.school, is_teacher: params[:user][:is_teacher])
-
-    if @user.save
-  		redirect_to school_users_path(school_id: school_id), notice: "User was created successfully."
-  	else
-  		logger.info("Failed to create user!")
-
-      @school = School.find(school_id)
-      @users = @school.users
-
-      flash.now[:alert] = "Failed to create user"
-  		render :index
-  	end
+    flash.now[:alert] = "Failed to create user"
+    render :index
+  end
+  
+  def bulk_add
+    users = CSV.parse(params[:file].read, :headers => true)
+    users.each do |row|
+      User.create!(row.to_hash.merge(school_id: params[:school_id]))
+    end
+    redirect_to school_users_path(params[:school_id]), notice: "#{users.size} users created"
+  rescue
+    redirect_to school_users_path(params[:school_id]), alert: "Invalid CSV file uploaded"
   end
 end

@@ -37,4 +37,6 @@ RSpec.configure do |config|
 
   config.include Devise::TestHelpers, type: :controller
   config.include AuthHelper
+  
+  config.fixture_path = "#{::Rails.root}/spec/fixtures"
 end
