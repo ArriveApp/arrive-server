@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Api::CoursesController do
   describe '#index' do
     it 'returns courses for the specified school as json' do
-      Course.stub(:find_by).with(school_id: '1') { [{course: 'course data'}] }
+      Course.stub(:where).with(school_id: '1') { [{course: 'course data'}] }
 
       get :index, school_id: '1', format: :json
 
