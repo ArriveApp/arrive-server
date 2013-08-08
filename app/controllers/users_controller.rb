@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
-  def index
+  def new
   	@newuser = User.create
   end
   def create
-  	@newuser = User.new(firstname: params[:user][:firstname], lastname: params[:user][:lastname], email: params[:user][:email], password: params[:user][:password], :school => current_user.school)
+  	@newuser = User.new(firstname: params[:user][:firstname], lastname: params[:user][:lastname], email: params[:user][:email], password: params[:user][:password], :school => current_user.school, is_teacher: params[:user][:is_teacher])
     if @newuser.save
   		puts @newuser
   		logger.error @newuser

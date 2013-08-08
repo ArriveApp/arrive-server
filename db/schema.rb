@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130801190441) do
+ActiveRecord::Schema.define(version: 20130807234846) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,8 +39,8 @@ ActiveRecord::Schema.define(version: 20130801190441) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "email",                default: "", null: false
-    t.string   "encrypted_password",   default: "", null: false
+    t.string   "email",                default: "",   null: false
+    t.string   "encrypted_password",   default: "",   null: false
     t.string   "authentication_token"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20130801190441) do
     t.integer  "school_id"
     t.string   "firstname"
     t.string   "lastname"
+    t.boolean  "is_teacher",           default: true
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree

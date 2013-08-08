@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe UsersController do
 
-  describe "GET 'index'" do
+  describe "GET 'new'" do
     it "returns http success" do
-      get 'index'
+      get 'new'
       response.should be_success
     end
   end

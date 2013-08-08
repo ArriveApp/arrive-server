@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_filter :allow_cross_domain_access
+  before_filter :check_credentials
 
   protected
   def configure_permitted_parameters
@@ -16,5 +17,11 @@ class ApplicationController < ActionController::Base
     response.headers["Access-Control-Allow-Origin"] = "*"
     response.headers["Access-Control-Allow-Methods"] = "GET, POST"
     response.headers["Access-Control-Allow-Headers"] = "origin, Content-Type, X-Requested-With"
+  end
+
+  def check_credentials
+    if current_user && !current_user.is_teacher?
+      sign_out_and_redirect(root_path)
+    end
   end
 end
