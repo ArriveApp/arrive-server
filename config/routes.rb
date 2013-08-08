@@ -18,7 +18,4 @@ ArriveServer::Application.routes.draw do
   end
 
   root to: 'home#index'
-
-  get 'schools/all', to: 'schools#get'
-
 end

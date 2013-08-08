@@ -21,7 +21,7 @@ class UsersController < ApplicationController
       @school = School.find(school_id)
       @users = @school.users
 
-      flash[:alert] = "Failed to create user"
+      flash.now[:alert] = "Failed to create user"
   		render :index
   	end
   end

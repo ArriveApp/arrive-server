@@ -3,7 +3,7 @@ class SchoolsController < ApplicationController
 
   def index
     @school = School.new
-    @all_schools= School.all
+    @schools= School.all
   end
 
   def create
@@ -14,13 +14,8 @@ class SchoolsController < ApplicationController
   	else
       logger.info("Attempt to save school with name: '#{@school.name}' failed.")
 
-      @all_schools = School.all
+      @schools = School.all
       render :index
   	end
   end
-
-  def get
-    render :json => School.all
-  end
-
 end

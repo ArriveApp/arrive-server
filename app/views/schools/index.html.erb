@@ -1,7 +1,7 @@
 <% active_page_is :school_management %>
 
 <div class='text-center'>
-  <%= form_for @school, url: schools_path do |f| %>
+  <%= form_for @school do |f| %>
       <%= render partial: 'shared/errors', locals: { model: @school } %>
 
       <div>
@@ -15,6 +15,6 @@
   <% end %>
 </div>
 
-<% @all_schools.each do |school| %>
+<% @schools.each do |school| %>
     <p><%= school.name %></p>
 <% end %>
