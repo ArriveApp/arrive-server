@@ -1,16 +1,11 @@
 class CoursesController < ApplicationController
   before_filter :authenticate_user!
 
-  respond_to :html
-  respond_to :json, only: :index
-
   def index
     @school = School.find(params[:school_id])
-
+    
     @course = Course.new(school: @school)
     @courses = @school.courses
-
-    respond_with(@courses)
   end
 
   def create

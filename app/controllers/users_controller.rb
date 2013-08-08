@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def index
     @school = School.find(params[:school_id])
+    
     @user = User.new(school: @school)
     @users = @school.users
   end

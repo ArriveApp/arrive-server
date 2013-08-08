@@ -7,7 +7,10 @@ ArriveServer::Application.routes.draw do
   end
 
   namespace :api do
-    resources :schools, only: :index
+    resources :schools, only: :index do
+      resources :courses, only: :index
+    end
+
   end
 
   resources :reports, only: :index do
