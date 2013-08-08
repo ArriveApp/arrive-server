@@ -1,7 +1,9 @@
 <% active_page_is :user_management %>
 
 <div class='text-center'>
-    <%= form_for :user, url: users_path do |f| %>
+    <%= form_for [@school, @user] do |f| %>
+      <%= render partial: 'shared/errors', locals: { model: @user } %>
+
       <div class="control-group">
         <%= f.label :firstname, class: "control-label" %>
         <div class="controls">
@@ -36,4 +38,7 @@
         </div>
       </div>
     <% end %>
+  <% @users.each do |user| %>
+    <%= user.firstname %><br>
+  <% end %>
 </div>

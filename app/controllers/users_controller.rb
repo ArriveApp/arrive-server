@@ -1,16 +1,28 @@
 class UsersController < ApplicationController
+  before_filter :authenticate_user!
+
   def index
-  	@newuser = User.create
+    @school = School.find(params[:school_id])
+    @user = User.new(school: @school)
+    @users = @school.users
   end
+
   def create
-  	@newuser = User.new(firstname: params[:user][:firstname], lastname: params[:user][:lastname], email: params[:user][:email], password: params[:user][:password], :school => current_user.school)
-    if @newuser.save
-  		puts @newuser
-  		logger.error @newuser
-  		redirect_to users_path, notice: "user created"
+    user_params = params[:user]
+    school_id = params[:school_id]
+
+    @user = User.new(firstname: user_params[:firstname], lastname: user_params[:lastname], email: user_params[:email], password: user_params[:password], school_id: school_id)
+
+    if @user.save
+  		redirect_to school_users_path(school_id: school_id), notice: "User was created successfully."
   	else
-  		logger.info("Failed to create user #{@newuser.firstname}")
-  		redirect_to users_path, alert: "failed to create user"
+  		logger.info("Failed to create user!")
+
+      @school = School.find(school_id)
+      @users = @school.users
+
+      flash[:alert] = "Failed to create user"
+  		render :index
   	end
   end
 end

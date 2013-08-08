@@ -12,9 +12,9 @@ ArriveServer::Application.routes.draw do
   resources :reports, only: :index do
     post :search, on: :collection
   end
-  resources :users, only: [:index, :create]
   resources :schools, only: [:index, :create] do
     resources :courses, only: [:index, :create]
+    resources :users, only: [:index, :create]
   end
 
   root to: 'home#index'
