@@ -4,8 +4,8 @@ FactoryGirl.define do
   factory :user do
     username "Dumbledore"
     email "dd@hogwarts.com"
-    password "password"
-    password_confirmation "password"
+    password "pass"
+    password_confirmation "pass"
     school
   end
 end

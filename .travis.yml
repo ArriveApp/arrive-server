@@ -8,3 +8,7 @@ deploy:
   app: arrive-server-dev
   on:
     repo: ArriveApp/arrive-server
+  run:
+    - "rake db:create"
+    - "rake db:migrate"
+    - "rake db:seed"
