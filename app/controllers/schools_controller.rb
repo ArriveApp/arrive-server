@@ -18,4 +18,8 @@ class SchoolsController < ApplicationController
       render :index
   	end
   end
+
+  def all
+	  render json: School.all
+  end
 end

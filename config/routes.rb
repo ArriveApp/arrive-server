@@ -17,15 +17,15 @@ ArriveServer::Application.routes.draw do
     post :search, on: :collection
   end
 
-  resources :schools, only: [:index, :create] do
+  resources :schools, only: [:index, :create, :all] do
     resources :courses, only: [:index, :create]
     resources :users, only: [:index, :create] do
       collection do
         post :bulk_add
       end
+    end
   end
-
-  end
+  get 'schools/all', to: 'schools#all'
 
   root to: 'home#index'
 end
