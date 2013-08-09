@@ -18,7 +18,7 @@ ArriveServer::Application.routes.draw do
   end
 
   resources :schools, only: [:index, :create, :all] do
-    resources :courses, only: [:index, :create]
+    resources :courses, only: [:index, :create, :all]
     resources :users, only: [:index, :create] do
       collection do
         post :bulk_add
@@ -26,6 +26,6 @@ ArriveServer::Application.routes.draw do
     end
   end
   get 'schools/all', to: 'schools#all'
-
+  get 'schools/:school_id/courses/all', to: 'courses#all'
   root to: 'home#index'
 end

@@ -1,11 +1,19 @@
 class CoursesController < ApplicationController
   before_filter :authenticate_user!
 
+
   def index
     @school = School.find(params[:school_id])
     
     @course = Course.new(school: @school)
     @courses = @school.courses
+  end
+
+  def all
+    puts "HELLO WORLD"
+    @school = School.find(params[:school_id])
+    
+    render json: @school.courses
   end
 
   def create

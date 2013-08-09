@@ -13,3 +13,5 @@ User.create(email:"ned@test.com", school_id: winterfell.id, username: "nedstark"
 User.create(email:"rob@test.com", school_id: winterfell.id, username: "robstark", password:"test", password_confirmation:"test", firstname: "Rob", lastname: "Stark");
 
 User.create(email:"someone@nightengale.edu", school_id: nightengale.id, username: "someone", password:"test", password_confirmation:"test", firstname: "somestudent", lastname: "yes");
+
+User.create(email:"adamleystrnad@gnightingale.org", school_id: nightingale.id, username: "adamleystrnad", password:"1234", password_confirmation:"1234", firstname: "Alexandra", lastname: "Damley-Strnad");
