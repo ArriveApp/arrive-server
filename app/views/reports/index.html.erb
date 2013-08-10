@@ -1,25 +1,38 @@
 <% active_page_is :reports %>
 
 <div class='text-center'>
-  <%= form_for(:search, url: search_reports_path) do |form| %>
-      From:
+  <%= form_for(:search, url: search_reports_path, html: {class: 'form-inline well'}) do |form| %>
+      <%= form.label :from %>
       <div class="input-append date" data-date="<%= @from_date %>" data-date-format="mm-dd-yyyy" data-ui="datepicker">
         <%=form.text_field :from, class:"span2", size:"16", value: @from_date %>
         <span class="add-on"><i class="icon-th"></i></span>
       </div>
 
-      To:
+      <%= form.label :to %>
       <div class="input-append date" data-date="<%= @to_date %>" data-date-format="mm-dd-yyyy" data-ui="datepicker">
         <%=form.text_field :to, class:"span2", size:"16", value: @to_date %>
         <span class="add-on"><i class="icon-th"></i></span>
       </div>
 
-      <%= form.submit value: 'Run Report', class: 'btn' %>
+      <%= form.submit value: 'Run Report', class: 'btn btn-primary' %>
   <% end %>
 
-  <div>
-    <% @check_ins.each do |check_in| %>
-        <p><%= check_in.user.username %> -- <%= check_in.course.name %> -- <%= check_in.created_at %></p>
-    <% end %>
-  </div>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Class</th>
+      <th>Time</th>
+    </tr>
+    </thead>
+    <tbody>
+        <% @check_ins.each do |check_in| %>
+            <tr>
+              <td><%= check_in.user.full_name %></td>
+              <td><%= check_in.course.name %></td>
+              <td><%= format_timestamp(check_in.created_at.to_s) %></td>
+            </tr>
+        <% end %>
+    </tbody>
+  </table>
 </div>

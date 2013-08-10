@@ -11,4 +11,8 @@ module ApplicationHelper
     object.errors.messages.values.flatten
   end
 
+  def format_timestamp(timestamp)
+    DateTime.parse(timestamp).strftime('%b, %d, %Y %I:%M %p')
+  end
+
 end
