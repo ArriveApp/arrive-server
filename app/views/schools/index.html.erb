@@ -1,20 +1,27 @@
 <% active_page_is :school_management %>
 
 <div class='text-center'>
-  <%= form_for @school do |f| %>
-      <%= render partial: 'shared/errors', locals: { model: @school } %>
+  <%= form_for @school, html: {class: 'form-inline well'} do |f| %>
+      <%= render partial: 'shared/errors', locals: {model: @school} %>
 
-      <div>
-        <%= f.label :name, 'School:' %>
-        <%= f.text_field :name %>
-      </div>
+      <%= f.label :name, 'School' %>
+      <%= f.text_field :name %>
 
-      <div>
-        <%= f.submit class: 'btn', value: 'Add School' %>
-      </div>
+      <%= f.submit class: 'btn btn-primary', value: 'Add School' %>
   <% end %>
 </div>
 
-<% @schools.each do |school| %>
-    <p><%= school.name %></p>
-<% end %>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>School Name</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @schools.each do |school| %>
+      <tr>
+        <td><%= school.name %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

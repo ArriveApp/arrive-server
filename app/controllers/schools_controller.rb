@@ -3,7 +3,7 @@ class SchoolsController < ApplicationController
 
   def index
     @school = School.new
-    @schools= School.all
+    @schools = School.all.order(:name)
   end
 
   def create
@@ -14,11 +14,12 @@ class SchoolsController < ApplicationController
   	else
       logger.info("Attempt to save school with name: '#{@school.name}' failed.")
 
-      @schools = School.all
+      @schools = School.all.order(:name)
       render :index
   	end
   end
 
+  # TODO: Remove this! Use Api::SchoolController instead in the client
   def all
 	  render json: School.all
   end

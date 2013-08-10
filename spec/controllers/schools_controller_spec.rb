@@ -6,9 +6,14 @@ describe SchoolsController do
   end
 
   describe "GET 'index'" do
+    before do
+      School.stub(:all) { double(ActiveRecord::Relation).as_null_object }
+    end
+
     it "returns http success" do
-      get 'index'
-      response.should be_success
+      get :index
+
+      expect(response).to be_success
     end
   end
 
