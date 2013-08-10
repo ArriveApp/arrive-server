@@ -8,9 +8,10 @@ ArriveServer::Application.routes.draw do
 
   namespace :api do
     resources :schools, only: :index do
-      resources :courses, only: :index
+      resources :courses, only: :index do
+        resource :check_in, only: :create
+      end
     end
-
   end
 
   resources :reports, only: :index do
