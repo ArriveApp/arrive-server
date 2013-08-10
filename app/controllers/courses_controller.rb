@@ -1,6 +1,5 @@
 class CoursesController < ApplicationController
-  before_filter :authenticate_user!
-
+  before_filter :authenticate_user!, :only => :create
 
   def index
     @school = School.find(params[:school_id])
@@ -10,7 +9,6 @@ class CoursesController < ApplicationController
   end
 
   def all
-    puts "HELLO WORLD"
     @school = School.find(params[:school_id])
     
     render json: @school.courses

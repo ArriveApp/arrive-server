@@ -7,8 +7,6 @@
 # Ignore bundler config.
 /.bundle
 
-
-
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-journal
@@ -17,5 +15,8 @@
 /log/*.log
 /tmp
 .DS_Store
+logfile
 
+# IDE
 .idea
+*.iml
