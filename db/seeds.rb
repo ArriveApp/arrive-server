@@ -3,6 +3,17 @@ hogwarts = School.create(name: "Hogwarts");
 winterfell = School.create(name: "Winterfell");
 nightingale = School.create(name: "Nightingale");
 
+# create test courses
+Course.create(name: "Defense Against Dark Arts", school_id: hogwarts.id)
+Course.create(name: "Potions", school_id: hogwarts.id)
+Course.create(name: "Herbology", school_id: hogwarts.id)
+Course.create(name: "Archery", school_id: winterfell.id)
+Course.create(name: "Wolf Taming", school_id: winterfell.id)
+Course.create(name: "History of Night's Watch", school_id: winterfell.id)
+Course.create(name: "Calculus", school_id: nightingale.id)
+Course.create(name: "French Culture and Civilization", school_id: nightingale.id)
+Course.create(name: "Physics", school_id: nightingale.id)
+
 # creating test users
 User.create(email: "testuser1@test.com", school_id: hogwarts.id, username: "harrypotter", password:"test", password_confirmation:"test", firstname: "Harry", lastname: "Potter");
 User.create(email:"testuser2@test.com", school_id: hogwarts.id, username: "hermione", password:"test", password_confirmation:"test", firstname: "Hermione", lastname: "Granger");
