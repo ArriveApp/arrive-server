@@ -6,4 +6,8 @@ class User < ActiveRecord::Base
   def full_name
     "#{firstname} #{lastname}"
   end
+
+  def role
+    is_teacher? ? 'Teacher' : 'Student'
+  end
 end

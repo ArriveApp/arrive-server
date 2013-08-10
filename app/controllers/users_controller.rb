@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     @school = School.find(params[:school_id])
     
     @user = User.new(school: @school)
-    @users = @school.users
+    @users = @school.users.order(:firstname).order(:is_teacher)
   end
 
   def create
@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     logger.info("Failed to create user!")
 
     @school = School.find(params[:school_id])
-    @users = @school.users
+    @users = @school.users.order(:firstname).order(:is_teacher)
 
     flash.now[:alert] = "Failed to create user"
     render :index
