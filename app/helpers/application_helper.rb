@@ -1,6 +1,6 @@
 module ApplicationHelper
-  def header_button_class_for(page_identifier)
-    @_active_page == page_identifier ? 'btn btn-success' : 'btn'
+  def nav_class_for(page_identifier)
+    @_active_page == page_identifier ? 'active' : ''
   end
 
   def active_page_is(active_page)
