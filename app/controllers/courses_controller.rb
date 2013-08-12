@@ -8,12 +8,6 @@ class CoursesController < ApplicationController
     @courses = @school.courses
   end
 
-  def all
-    @school = School.find(params[:school_id])
-    
-    render json: @school.courses
-  end
-
   def create
     school_id = params[:school_id]
 

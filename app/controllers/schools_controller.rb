@@ -19,8 +19,4 @@ class SchoolsController < ApplicationController
   	end
   end
 
-  # TODO: Remove this! Use Api::SchoolController instead in the client
-  def all
-	  render json: School.all
-  end
 end
