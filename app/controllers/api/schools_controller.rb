@@ -1,7 +1,7 @@
 module Api
   class SchoolsController < ApiController
     def index
-      respond_with School.all
+      render json: School.all
     end
 
   end
