@@ -1,9 +1,8 @@
 <% active_page_is :course_management %>
 
+<%= render partial: 'shared/errors', locals: { model: @course } %>
 <div class='text-center'>
   <%= form_for [@school, @course], html: {class: 'form-inline well'} do |f| %>
-      <%= render partial: 'shared/errors', locals: {model: @course} %>
-
       <%= f.label :name, 'Course' %>
       <%= f.text_field :name %>
 

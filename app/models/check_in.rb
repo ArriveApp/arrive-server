@@ -1,11 +1,12 @@
 class CheckIn < ActiveRecord::Base
   belongs_to :user
   belongs_to :course
+  belongs_to :school
 
-  def self.search_by(from, to)
+  def self.search_by(from, to, school_id)
     from_time = Time.strptime(from, '%m-%d-%Y').utc.beginning_of_day
     to_time = Time.strptime(to,'%m-%d-%Y').utc.end_of_day
-    self.where('created_at >= ? AND created_at <= ?', from_time, to_time)
+    self.where('school_id = ? AND created_at >= ? AND created_at <= ?', school_id, from_time, to_time)
   end
 end
 

@@ -2,8 +2,12 @@
 
 FactoryGirl.define do
   factory :user do
-    username "Dumbledore"
-    email "dd@hogwarts.com"
+    sequence :username do |n|
+      "Griffindor#{n}"
+    end
+    sequence :email do |n|
+      "griffindor_#{n}@hogwarts.com"
+    end
     password "pass"
     password_confirmation "pass"
     school

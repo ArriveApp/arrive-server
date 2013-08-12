@@ -2,19 +2,18 @@ require 'spec_helper'
 
 describe CheckIn do
 
-  let(:snape) { FactoryGirl.create(:user, email: "snape@hogwarts.com") }
-  let(:dobby) { FactoryGirl.create(:user, email: "dobby@hogwarts.com") }
-  let(:magic) { FactoryGirl.create(:course) }
+  let(:hogwarts) { FactoryGirl.create(:school) }
+  let(:winterfell) { FactoryGirl.create(:school, name: "winterfell") }
 
   describe ".search_by" do
     it "should return the checkins made between the provided dates when both from and to are same" do
       today = Time.now.utc
       date = today.strftime('%m-%d-%Y')
 
-      snape_checkin = FactoryGirl.create(:check_in, user: snape, course: magic, created_at: today)
-      dobby_checkin = FactoryGirl.create(:check_in, user: dobby, course: magic, created_at: today)
+      snape_checkin = FactoryGirl.create(:check_in, school: hogwarts, created_at: today)
+      dobby_checkin = FactoryGirl.create(:check_in, school: hogwarts, created_at: today)
 
-      checkins = CheckIn.search_by date, date
+      checkins = CheckIn.search_by date, date, hogwarts.id
 
       checkins.should =~ [snape_checkin, dobby_checkin]
     end
@@ -24,12 +23,25 @@ describe CheckIn do
       from = today.strftime('%m-%d-%Y')
       to = Time.now.utc.tomorrow.strftime('%m-%d-%Y')
 
-      FactoryGirl.create(:check_in, user: snape, course: magic, created_at: Time.now.utc.yesterday)
-      dobby_checkin = FactoryGirl.create(:check_in, user: dobby, course: magic, created_at: today)
+      FactoryGirl.create(:check_in, school: hogwarts, created_at: Time.now.utc.yesterday)
+      dobby_checkin = FactoryGirl.create(:check_in, school: hogwarts, created_at: today)
 
-      checkins = CheckIn.search_by from, to
+      checkins = CheckIn.search_by from, to, hogwarts.id
 
       checkins.should =~ [dobby_checkin]
+    end
+
+    it "should not retun the checkins of a different school" do
+      today = Time.now.utc
+      date = today.strftime('%m-%d-%Y')
+
+      FactoryGirl.create(:check_in, school: winterfell, created_at: today)
+      snape_checkin = FactoryGirl.create(:check_in, school: hogwarts, created_at: today)
+      dobby_checkin = FactoryGirl.create(:check_in, school: hogwarts, created_at: today)
+
+      checkins = CheckIn.search_by date, date, hogwarts.id
+
+      checkins.should =~ [snape_checkin, dobby_checkin]
     end
   end
 end

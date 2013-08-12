@@ -21,7 +21,7 @@ class CoursesController < ApplicationController
       @school = School.find(school_id)
       @courses = @school.courses
 
-      flash.now[:alert] = 'Failed to create a course'
+      flash.now[:alert] = 'Failed to create a course.'
       render :index
   	end
   end

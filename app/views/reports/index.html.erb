@@ -1,20 +1,20 @@
 <% active_page_is :reports %>
 
-<div class='text-center'>
-  <%= form_for(:search, url: search_reports_path, html: {class: 'form-inline well'}) do |form| %>
+<div>
+  <%= form_tag(school_reports_path(params[:school_id]), method: 'get', html: {class: 'form-inline well'}) do |form| %>
       <%= form.label :from %>
       <div class="input-append date" data-date="<%= @from_date %>" data-date-format="mm-dd-yyyy" data-ui="datepicker">
-        <%=form.text_field :from, class:"span2", size:"16", value: @from_date %>
+        <%=text_field_tag :from, @from, class:"span2", size:"16"%>
         <span class="add-on"><i class="icon-th"></i></span>
       </div>
 
       <%= form.label :to %>
       <div class="input-append date" data-date="<%= @to_date %>" data-date-format="mm-dd-yyyy" data-ui="datepicker">
-        <%=form.text_field :to, class:"span2", size:"16", value: @to_date %>
+        <%=text_field_tag :to, @to, class:"span2", size:"16"%>
         <span class="add-on"><i class="icon-th"></i></span>
       </div>
 
-      <%= form.submit value: 'Run Report', class: 'btn btn-primary' %>
+      <%= submit_tag 'Run Report', class: 'btn btn-primary', name: nil %>
   <% end %>
 
   <table class="table table-striped">

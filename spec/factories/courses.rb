@@ -1,6 +1,8 @@
 FactoryGirl.define do
   factory :course do
-    name "Math"
+    sequence :name do |n|
+      "Math_#{n}"
+    end
     school
   end
 end

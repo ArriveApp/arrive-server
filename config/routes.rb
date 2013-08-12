@@ -14,12 +14,9 @@ ArriveServer::Application.routes.draw do
     end
   end
 
-  resources :reports, only: :index do
-    post :search, on: :collection
-  end
-
   resources :schools, only: [:index, :create, :all] do
     resources :courses, only: [:index, :create, :all]
+    resources :reports, only: [:index]
     resources :users, only: [:index, :create] do
       collection do
         post :bulk_add
