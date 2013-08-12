@@ -2,7 +2,7 @@ ArriveServer::Application.routes.draw do
   devise_for :users
   devise_scope :user do
     namespace :api do
-      resource :session, only: [:create]
+      resource :session, only: [:create], :via => [:post]
     end
   end
 
@@ -28,4 +28,8 @@ ArriveServer::Application.routes.draw do
   end
 
   root to: 'home#index'
+  namespace :api do
+      match "session" => "api#options", :via => [:options]
+  end
+  
 end

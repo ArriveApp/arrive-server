@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_filter :authenticate_user!, :only => :create
+  before_filter :authenticate_user!
 
   def index
     @school = School.find(params[:school_id])

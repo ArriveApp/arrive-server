@@ -5,10 +5,10 @@ module Api
     before_filter :ensure_params_exist
 
     def create
-      resource = User.find_for_database_authentication(email: params[:user][:email])
+      resource = User.find_for_database_authentication(email: params[:session][:email])
       return invalid_login_attempt unless resource
 
-      if resource.valid_password?(params[:user][:password])
+      if resource.valid_password?(params[:session][:password])
         resource.reset_authentication_token!
         render json: {success: true, auth_token: resource.authentication_token, email: resource.email}
         return
@@ -19,7 +19,7 @@ module Api
     protected
 
     def ensure_params_exist
-      return unless params[:user].blank?
+      return unless params[:session].blank?
       render json: {success: false, message: 'Missing user credentials.'}, status: 422
     end
 
