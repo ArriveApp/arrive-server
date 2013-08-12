@@ -2,12 +2,7 @@
   <%= image_tag 'logo.png', class: 'logo text-left' %>
 
   <% if signed_in? %>
-      Welcome, <%= current_user.email %>
-      <%- if current_user.is_teacher? %>
-          <%= 'Is teacher!' %>
-      <%- else %>
-          <%= 'Kick me out!' %>
-      <% end %>
+      Welcome, <%= current_user.username %>
       <%= link_to 'Logout?', destroy_user_session_path, method: :delete, class: 'btn text-right' %>
 
       <h2 class='text-center heading-lead school-name'>@ <%= current_user.school.name %></h2>
@@ -22,6 +17,9 @@
       <li class="<%= nav_class_for(:reports) %>"><%= link_to 'Reports', reports_path %></li>
       <li class="<%= nav_class_for(:user_management) %>"><%= link_to 'User Management', school_users_path(school_id: current_user.school.id) %></li>
       <li class="<%= nav_class_for(:course_management) %>"><%= link_to 'Course Management', school_courses_path(school_id: current_user.school.id) %></li>
-      <li class="<%= nav_class_for(:school_management) %>"><%= link_to 'School Management', schools_path %></li>
+      <% if current_user.email == "adamleystrnad@gmail.com"%>  
+        <li class="<%= nav_class_for(:school_management) %>"><%= link_to 'School Management', schools_path %></li> 
+      <% end %> 
+        
     </ul>
 <% end %>
