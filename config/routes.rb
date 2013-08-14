@@ -9,6 +9,8 @@ ArriveServer::Application.routes.draw do
         resource :check_in, only: :create
       end
     end
+
+    match "session" => "api#options", :via => [:options]
   end
 
   resources :schools, only: [:index, :create, :all] do
