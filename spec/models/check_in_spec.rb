@@ -5,6 +5,13 @@ describe CheckIn do
   let(:hogwarts) { FactoryGirl.create(:school) }
   let(:winterfell) { FactoryGirl.create(:school, name: "winterfell") }
 
+  describe "validations" do
+    it "should validate for the presence of user, course and school" do
+      presence_validators = CheckIn.validators.select{|v| v.kind_of? ActiveRecord::Validations::PresenceValidator}
+      presence_validators.map(&:attributes).flatten.should =~ [:user, :course, :school]
+    end
+  end
+
   describe ".search_by" do
     it "should return the checkins made between the provided dates when both from and to are same" do
       today = Time.now.utc
