@@ -10,4 +10,9 @@ class User < ActiveRecord::Base
   def role
     is_teacher? ? 'Teacher' : 'Student'
   end
+
+  def as_json(options = {})
+    default_options = {only: [:authentication_token, :is_teacher]}
+    super(default_options.merge(options))
+  end
 end

@@ -1,12 +1,9 @@
 ArriveServer::Application.routes.draw do
   devise_for :users
-  devise_scope :user do
-    namespace :api do
-      resource :session, only: [:create], :via => [:post]
-    end
-  end
 
   namespace :api do
+    resource :session, only: :create
+
     resources :schools, only: :index do
       resources :courses, only: :index do
         resource :check_in, only: :create

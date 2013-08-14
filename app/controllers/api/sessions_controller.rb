@@ -1,31 +1,26 @@
 module Api
   class SessionsController < ApiController
-
-    skip_before_action :verify_authenticity_token
-    before_filter :ensure_params_exist
-
     def create
-      resource = User.find_for_database_authentication(email: params[:session][:email])
-      return invalid_login_attempt unless resource
+      user = User.find_for_database_authentication(email: params[:session][:email])
 
-      if resource.valid_password?(params[:session][:password])
-        resource.reset_authentication_token!
-        render json: {success: true, auth_token: resource.authentication_token, email: resource.email}
-        return
+      if user.present? && user.valid_password?(params[:session][:password])
+        user.reset_authentication_token!
+
+        response_body = {user: user,
+                         school: user.school,
+                         courses: user.school.courses}
+        render json: response_body, status: :created
+      else
+        invalid_login_attempt
       end
-      invalid_login_attempt
+
     end
 
-    protected
-
-    def ensure_params_exist
-      return unless params[:session].blank?
-      render json: {success: false, message: 'Missing user credentials.'}, status: 422
-    end
+    private
 
     def invalid_login_attempt
       warden.custom_failure!
-      render json: {success: false, message: 'Invalid email or password.'}, status: 401
+      render json: {success: false, message: 'Invalid email or password.'}, status: :unauthorized
     end
   end
 

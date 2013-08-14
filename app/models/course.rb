@@ -4,4 +4,9 @@ class Course < ActiveRecord::Base
                     uniqueness: true
 
   belongs_to :school
+
+  def as_json(options = {})
+    default_options = {only: [:id, :name]}
+    super(default_options.merge(options))
+  end
 end

@@ -18,6 +18,15 @@ module Api
       render :text => "", :layout => false
     end
 
+    private
+
+    def authenticate_user!
+      if current_user.nil?
+        warden.custom_failure!
+        head :unauthorized
+      end
+    end
+
   end
 
 end
