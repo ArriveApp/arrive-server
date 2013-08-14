@@ -1,3 +1,4 @@
+#TODO: Remove this, no longer needed
 module Api
   class SchoolsController < ApiController
     def index

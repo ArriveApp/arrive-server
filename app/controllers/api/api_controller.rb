@@ -1,7 +1,7 @@
 module Api
   class ApiController < ActionController::Base
     protect_from_forgery
-    before_filter :allow_cross_domain_access
+    before_filter :allow_cross_domain_access, :authenticate_user!
 
     respond_to :json
 

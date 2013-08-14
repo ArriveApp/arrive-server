@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Api::CheckInsController do
   describe '#create' do
     def post_to_create
-      post :create, format: :json, school_id: '1', course_id: course_id, check_in: {user_id: user_id}
+      post :create, format: :json, auth_token: 'some auth token', school_id: '1', course_id: course_id, check_in: {user_id: user_id}
     end
 
     let(:check_in) { double(CheckIn).as_null_object }
@@ -11,6 +11,7 @@ describe Api::CheckInsController do
     let(:user_id) { '3' }
 
     before do
+      stub_sign_in
       CheckIn.stub(:create) { check_in }
     end
 

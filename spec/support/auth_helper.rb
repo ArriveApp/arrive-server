@@ -1,6 +1,6 @@
 module AuthHelper
   def stub_sign_in(user = nil)
-    user ||= FactoryGirl.build(:user)
+    user ||= User.new
     request.env['warden'] = double(Warden,
                                    :authenticate => user,
                                    :authenticate! => user,

@@ -1,8 +1,9 @@
 require 'spec_helper'
 
+#TODO: Remove this when removing the controller
 describe Api::CoursesController do
   describe '#index' do
-    it 'returns courses for the specified school as json' do
+    xit 'returns courses for the specified school as json' do
       Course.stub(:where).with(school_id: '1') { [{course: 'course data'}] }
 
       get :index, school_id: '1', format: :json

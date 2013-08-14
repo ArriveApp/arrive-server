@@ -1,8 +1,9 @@
 require 'spec_helper'
 
+#TODO: Remove this when removing the controller
 describe Api::SchoolsController do
   describe '#index' do
-    it 'returns schools as json' do
+    xit 'returns schools as json' do
       School.stub(:all) { [{school: 'school data'}] }
 
       get :index, format: :json

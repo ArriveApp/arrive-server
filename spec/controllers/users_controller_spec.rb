@@ -8,8 +8,6 @@ describe UsersController do
   end
   
   describe "GET 'index'" do
-    render_views
-    
     it "returns http success" do
       get 'index', school_id: @school.id
 
