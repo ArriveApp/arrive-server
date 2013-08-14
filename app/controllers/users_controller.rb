@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 
   def create
     params.permit!
-    @user = User.create!(params[:user].merge(school_id: params[:school_id]))
+    @user = User.create!(params[:user].merge(school_id: params[:school_id], pin: params[:user][:password]))
     redirect_to school_users_path(school_id: params[:school_id]), notice: "User was created successfully."
   rescue
     logger.info("Failed to create user!")
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
   def bulk_add
     users = CSV.parse(params[:file].read, :headers => true)
     users.each do |row|
-      User.create!(row.to_hash.merge(school_id: params[:school_id]))
+      User.create!(row.to_hash.merge(school_id: params[:school_id], pin: row['password']))
     end
     redirect_to school_users_path(params[:school_id]), notice: "#{users.size} users created"
   rescue

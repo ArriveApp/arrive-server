@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
 
   belongs_to :school
 
+  validates :pin, :uniqueness => true
+
   def full_name
     "#{firstname} #{lastname}"
   end

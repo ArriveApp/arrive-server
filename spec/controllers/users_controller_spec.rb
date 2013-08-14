@@ -22,6 +22,12 @@ describe UsersController do
       expect(User.count).to be 1
       flash[:notice].should == 'User was created successfully.'
     end
+
+    it "should set the password as the pin when creating a user" do
+      User.should_receive(:create!).with(hash_including(pin: '1234'))
+
+      post 'create', user: {firstname: 'chris', lastname: 'george', email: 'email@email.com', password: '1234'}, school_id: @school.id
+    end
     
     it "should not create an invalid user" do
       post 'create', user: {}, school_id: @school.id
@@ -46,6 +52,13 @@ describe UsersController do
       post 'bulk_add', file: file, school_id: @school.id
       
       flash[:alert].should == 'Invalid CSV file uploaded'
+    end
+
+    it "should set the password as the pin when creating a user" do
+      file = fixture_file_upload('users.csv', 'text/csv')
+
+      post 'bulk_add', file: file, school_id: @school.id
+      User.all.map(&:pin).should =~ ['1234', '4321']
     end
   end
 end
