@@ -22,8 +22,4 @@ ArriveServer::Application.routes.draw do
   end
 
   root to: 'home#index'
-  namespace :api do
-      match "session" => "api#options", :via => [:options]
-  end
-  
 end

@@ -7,18 +7,9 @@ module Api
 
     def allow_cross_domain_access
       response.headers['Access-Control-Allow-Origin'] = '*'
-      response.headers['Access-Control-Request-Method'] = '*'
-      response.headers["Access-Control-Allow-Methods"] = "PUT, OPTIONS, GET, DELETE, POST"
+      response.headers["Access-Control-Allow-Methods"] = "GET, POST"
       response.headers['Access-Control-Allow-Headers'] = '*,x-requested-with,Content-Type'
     end
-
-    def options
-      puts "options"
-      allow_cross_domain_access
-      render :text => "", :layout => false
-    end
-
-    private
 
     def authenticate_user!
       if current_user.nil?
