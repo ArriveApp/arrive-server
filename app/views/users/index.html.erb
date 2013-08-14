@@ -20,7 +20,7 @@
         <%= f.password_field :password %>
       </div>
 
-      <div class="control-group">
+      <div class="controls-row">
         <%= f.label :is_teacher, 'Is this user a teacher?', class: 'control-label' %>
         <%= f.check_box :is_teacher %>
       </div>
@@ -29,9 +29,9 @@
   <% end %>
 
   <%= form_tag bulk_add_school_users_path(@school), multipart: true, class: 'form-inline well' do %>
-      <%= file_field_tag :file, title: "Select file to upload" %>
+       <%= file_field_tag :file, title: "Select file to upload" %>
 
-      <%= submit_tag "Bulk upload users", class: "btn btn-primary" %>
+       <%= submit_tag "Bulk upload users", class: "btn btn-primary" %>
   <% end %>
 
   <table class="table table-striped">
