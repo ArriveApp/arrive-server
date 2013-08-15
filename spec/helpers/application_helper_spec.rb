@@ -22,18 +22,4 @@ describe ApplicationHelper do
 
   end
 
-  describe '#error_messages' do
-    it "should return all the error messages on a field" do
-      messages = double(:messages => { name: ["error message 1", "error message 2"]})
-      model = double(:errors => messages)
-      error_messages(model).should == ["error message 1", "error message 2"]
-    end
-
-    it "should return all the error messages from multiple field" do
-      messages = double(:messages => { name: ["error message 1", "error message 2"], age: ["error message 3", "error message 4"]})
-      model = double(:errors => messages)
-      error_messages(model).should == ["error message 1", "error message 2", "error message 3", "error message 4"]
-    end
-  end
-
 end

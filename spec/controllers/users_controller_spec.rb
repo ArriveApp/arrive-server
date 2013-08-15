@@ -24,7 +24,7 @@ describe UsersController do
     end
 
     it "should set the password as the pin when creating a user" do
-      User.should_receive(:create!).with(hash_including(pin: '1234'))
+      User.should_receive(:new).with(hash_including(pin: '1234')) { double(User).as_null_object }
 
       post 'create', user: {firstname: 'chris', lastname: 'george', email: 'email@email.com', password: '1234'}, school_id: @school.id
     end

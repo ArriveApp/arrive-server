@@ -14,7 +14,7 @@ describe Course do
 
     it "should render the appropriate error message" do
       course.valid?
-      course.errors.messages[:name].should include 'Please enter a Course Name before you click Submit.'
+      course.errors.full_messages.should include "Course name can't be blank"
     end
   end
 

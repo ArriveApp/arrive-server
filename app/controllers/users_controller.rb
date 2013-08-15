@@ -12,9 +12,13 @@ class UsersController < ApplicationController
 
   def create
     params.permit!
-    @user = User.create!(params[:user].merge(school_id: params[:school_id], pin: params[:user][:password]))
-    redirect_to school_users_path(school_id: params[:school_id]), notice: "User was created successfully."
-  rescue
+    @user = User.new(params[:user].merge(school_id: params[:school_id], pin: params[:user][:password]))
+
+    if @user.save
+      redirect_to school_users_path(school_id: params[:school_id]), notice: "User was created successfully."
+      return
+    end
+
     logger.info("Failed to create user!")
 
     @school = School.find(params[:school_id])
