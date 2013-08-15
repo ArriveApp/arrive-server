@@ -1,9 +1,20 @@
 module Api
   class CheckInsController < ApiController
     def create
-      check_in = CheckIn.create(course_id: params[:course_id], user_id: current_user.id, school_id: params[:school_id])
+      pin = params[:pin]
+      user_checking_in_id = current_user.id
 
-      render json: check_in, status: :created
+      if pin.present?
+        user = User.find_by(pin: pin)
+
+        head :unauthorized and return if user.nil?
+
+        user_checking_in_id = user.id
+      end
+
+      CheckIn.create(course_id: params[:course_id], user_id: user_checking_in_id, school_id: params[:school_id])
+
+      head :created
     end
 
   end
