@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   end
 
   def as_json(options = {})
-    default_options = {only: [:authentication_token, :is_teacher]}
+    default_options = {only: [:authentication_token, :is_teacher, :firstname]}
     super(default_options.merge(options))
   end
 end

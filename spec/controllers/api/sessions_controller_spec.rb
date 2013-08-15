@@ -42,6 +42,7 @@ describe Api::SessionsController do
       end
 
       it 'returns user, school, and courses json' do
+        user.firstname = 'Ned Stark'
         user.authentication_token = '1234abcd'
         user.is_teacher = false
         user.school = School.new(id: 1, name: 'My School', courses: [Course.new(id: 1, name: 'Math')])
@@ -50,7 +51,7 @@ describe Api::SessionsController do
         post :create, format: :json, session: {email: 'user@user.com', password: '1234'}
 
         expect(response.body).to eq({
-                                      user: {authentication_token: '1234abcd', is_teacher: false},
+                                      user: {authentication_token: '1234abcd', firstname: 'Ned Stark', is_teacher: false},
                                       school: {id: 1, name: 'My School'},
                                       courses: [{id: 1, name: 'Math'}]
                                     }.to_json)
