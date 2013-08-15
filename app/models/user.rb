@@ -3,7 +3,9 @@ class User < ActiveRecord::Base
 
   belongs_to :school
 
-  validates :pin, :uniqueness => true
+  validates :pin, uniqueness: true
+  validates :firstname, presence: true
+  validates :lastname, presence: true
 
   def full_name
     "#{firstname} #{lastname}"

@@ -29,3 +29,6 @@ en:
         name: 'Course name'
       school:
         name: 'School name'
+      user:
+        firstname: 'First name'
+        lastname: 'Last name'
