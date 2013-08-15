@@ -10,12 +10,12 @@ ArriveServer::Application.routes.draw do
       end
     end
 
-    match "session" => "api#options", :via => [:options]
+    match "*all" => "api#options", via: :options
   end
 
-  resources :schools, only: [:index, :create, :all] do
-    resources :courses, only: [:index, :create, :all]
-    resources :reports, only: [:index]
+  resources :schools, only: [:index, :create] do
+    resources :courses, only: [:index, :create]
+    resources :reports, only: :index
     resources :users, only: [:index, :create] do
       collection do
         post :bulk_add
