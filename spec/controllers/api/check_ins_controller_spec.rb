@@ -9,9 +9,9 @@ describe Api::CheckInsController do
 
     let(:school_id) { '1' }
     let(:course_id) { '2' }
-    let(:user_id) { '3' }
+    let(:user_id) { 3 }
 
-    let(:user) { double(User, id: user_id) }
+    let(:user) { User.new(id: user_id) }
 
     before do
       stub_sign_in
@@ -32,8 +32,8 @@ describe Api::CheckInsController do
 
     context 'check in with a pin' do
       let(:pin) { '1234' }
-      let(:user_with_pin_id) { '4' }
-      let(:user_with_pin) { double(User, id: user_with_pin_id) }
+      let(:user_with_pin_id) { 4 }
+      let(:user_with_pin) { User.new(id: user_with_pin_id) }
 
       it 'creates a check in for the user with the specified pin' do
         User.should_receive(:find_by).with(pin: pin) { user_with_pin }
@@ -45,7 +45,6 @@ describe Api::CheckInsController do
 
       it 'is unauthorized and does not create a check in if the pin is not valid' do
         User.should_receive(:find_by).with(pin: pin) { nil }
-
         CheckIn.should_not_receive(:create)
 
         post_to_create(pin: pin)
@@ -55,9 +54,13 @@ describe Api::CheckInsController do
     end
 
     it 'returns a 201' do
+      user.stub(:firstname) { 'Ned Stark' }
+      controller.stub(:current_user) { user }
+
       post_to_create
 
       expect(response.status).to eq(201)
+      expect(response.body).to eq({firstname: 'Ned Stark'}.to_json)
     end
 
   end
