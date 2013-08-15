@@ -3,17 +3,17 @@
 <head>
   <title>ArriveServer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <%= content_tag :body, id: "#{controller.controller_name}" do %>
-<%= render 'shared/header' unless controller.controller_name == "sessions" %>
-<div class='container'>
-  <div class="row">
-    <%= bootstrap_flash %>
-    <%= yield %>
-  </div>
-</div>
+    <%= render 'shared/header' %>
+    <div class='container'>
+      <div class="row">
+        <%= bootstrap_flash %>
+        <%= yield %>
+      </div>
+    </div>
 <% end %>
 </html>
