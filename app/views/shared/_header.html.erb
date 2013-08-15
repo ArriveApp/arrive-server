@@ -1,32 +1,26 @@
-<div class='logo-header'>
-  <% if signed_in? %>
-    <div class="settings">
-      <div class="identification">
-        <div class="user-login-text">
+<div class='navbar navbar-static-top'>
+  <div class="navbar-inner">
+    <div class = "container">
+      <a class="brand" href="#">
+        <%= image_tag 'logo.png', class: 'logo text-left', size: '125x375' %>
+      </a>
+      <% if signed_in? %>
+        <ul class="nav nav-pills">
+          <li class="<%= nav_class_for(:dashboard) %>"><%= link_to 'Dashboard', root_path %></li>
+          <li class="<%= nav_class_for(:reports) %>"><%= link_to 'Reports', school_reports_path(school_id: current_user.school.id) %></li>
+          <li class="<%= nav_class_for(:user_management) %>"><%= link_to 'User Management', school_users_path(school_id: current_user.school.id) %></li>
+          <li class="<%= nav_class_for(:course_management) %>"><%= link_to 'Course Management', school_courses_path(school_id: current_user.school.id) %></li>
+          <% if current_user.email == "adamleystrnad@gmail.com"%>  
+            <li class="<%= nav_class_for(:school_management) %>"><%= link_to 'School Management', schools_path %></li> 
+          <% end %> 
+        </ul>
+        <div class="identification pull-right">
           <%= current_user.username %><span class="school-name">@<%= current_user.school.name %></span>
+          <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'btn logout_button' %>
         </div>
-      </div>
-      <div>
-        <%= link_to 'Logout', destroy_user_session_path, method: :delete, id: 'logout-button', class: 'btn text-right' %>
-      </div>
+      <% else %>
+          <h2 class="heading-lead text-success"><%= t 'messages.welcome_to_arrive' %></h2>
+      <% end %>
     </div>
-  <% else %>
-      <h2 class="heading-lead text-success"><%= t 'messages.welcome_to_arrive' %></h2>
-  <% end %>
-  <div class="logo-section">
-    <%= image_tag 'logo.png', class: 'logo text-left' %>
   </div>
 </div>
-
-<% if signed_in? %>
-    <ul class="nav nav-pills">
-      <li class="<%= nav_class_for(:dashboard) %>"><%= link_to 'Dashboard', root_path %></li>
-      <li class="<%= nav_class_for(:reports) %>"><%= link_to 'Reports', school_reports_path(school_id: current_user.school.id) %></li>
-      <li class="<%= nav_class_for(:user_management) %>"><%= link_to 'User Management', school_users_path(school_id: current_user.school.id) %></li>
-      <li class="<%= nav_class_for(:course_management) %>"><%= link_to 'Course Management', school_courses_path(school_id: current_user.school.id) %></li>
-      <% if current_user.email == "adamleystrnad@gmail.com"%>  
-        <li class="<%= nav_class_for(:school_management) %>"><%= link_to 'School Management', schools_path %></li> 
-      <% end %> 
-        
-    </ul>
-<% end %>

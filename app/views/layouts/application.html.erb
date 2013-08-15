@@ -8,19 +8,12 @@
   <%= csrf_meta_tags %>
 </head>
 <%= content_tag :body, id: "#{controller.controller_name}" do %>
-  <div class="container">
-    <div class="row">
-      <div class="span8 offset2">
-        <%= render 'shared/header' %>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="span8 offset2">
-        <%= bootstrap_flash %>
-        <%= yield %>
-      </div>
-    </div>
+<%= render 'shared/header' %>
+<div class='container'>
+  <div class="row">
+    <%= bootstrap_flash %>
+    <%= yield %>
   </div>
+</div>
 <% end %>
 </html>

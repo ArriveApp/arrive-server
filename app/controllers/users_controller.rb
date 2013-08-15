@@ -1,7 +1,7 @@
 require 'csv'
 
 class UsersController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authorized?
 
   def index
     @school = School.find(params[:school_id])
