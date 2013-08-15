@@ -1,8 +1,12 @@
-<div class="row">
+
   <div class="span8 offset2 text-center">
     <%= image_tag "logo.png", class: "logo" %>
-    <h1 class="heading-lead text-success"><%= t 'messages.welcome_to_arrive', %></h1>
+  </div>
 
+  <div>
+    <h1 class="heading-lead text-success"><%= t 'messages.welcome_to_arrive', %></h1>
+  </div>
+  
     <%= form_for :user, url: session_path(:user), html: { class: "sign-in form-horizontal text-left" } do |f| %>
       <div class="control-group">
         <%= f.label :email, class: "control-label" %>
@@ -26,4 +30,4 @@
     <% end %>
 
   </div>
-</div>
+

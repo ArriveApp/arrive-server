@@ -1,4 +1,8 @@
-<h5 class='login-message'>Log in below to access the admin portal.</h5>
+<div class="span8 offset2 text-center">
+  <%= image_tag "logo.png", class: "logo_welcome" %>
+  <h1 class="heading-lead text-success"><%= t 'messages.welcome_to_arrive' %></h1>
+  <h5 class='login-message'>Log in below to access the admin portal.</h5>
+</div>
 
 <%= form_for :user, url: session_path(:user), html: { class: "sign-in form-horizontal" } do |f| %>
   <div class="control-group">

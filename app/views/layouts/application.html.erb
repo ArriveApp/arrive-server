@@ -8,7 +8,7 @@
   <%= csrf_meta_tags %>
 </head>
 <%= content_tag :body, id: "#{controller.controller_name}" do %>
-<%= render 'shared/header' %>
+<%= render 'shared/header' unless controller.controller_name == "sessions" %>
 <div class='container'>
   <div class="row">
     <%= bootstrap_flash %>
