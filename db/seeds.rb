@@ -1,28 +1,26 @@
-# create test school
-hogwarts = School.create(name: "Hogwarts");
-winterfell = School.create(name: "Winterfell");
-nightingale = School.create(name: "Nightingale");
+# Development test data
 
-# create test courses
+hogwarts = School.create(name: "Hogwarts")
+winterfell = School.create(name: "Winterfell")
+nightingale = School.create(name: "Winterfell")
+
 Course.create(name: "Defense Against Dark Arts", school_id: hogwarts.id)
 Course.create(name: "Potions", school_id: hogwarts.id)
 Course.create(name: "Herbology", school_id: hogwarts.id)
-Course.create(name: "Archery", school_id: winterfell.id)
+
 Course.create(name: "Wolf Taming", school_id: winterfell.id)
 Course.create(name: "History of Night's Watch", school_id: winterfell.id)
-Course.create(name: "Calculus", school_id: nightingale.id)
-Course.create(name: "French Culture and Civilization", school_id: nightingale.id)
-Course.create(name: "Physics", school_id: nightingale.id)
+Course.create(name: "Archery", school_id: winterfell.id)
 
-# creating test users
-User.create(email: "testuser1@test.com", school_id: hogwarts.id, username: "harrypotter", password: "test", password_confirmation: "test", firstname: "Harry", lastname: "Potter");
-User.create(email: "testuser2@test.com", school_id: hogwarts.id, username: "hermione", password: "test", password_confirmation: "test", firstname: "Hermione", lastname: "Granger");
-User.create(email: "testuser3@test.com", school_id: hogwarts.id, username: "ronweasley", password: "test", password_confirmation: "test", firstname: "Ron", lastname: "Weasly");
+# Admin user
+User.create(email: "adamleystrnad@winterfell.org", password: "1234", password_confirmation: "1234", pin: '1234', firstname: "Alexandra", lastname: "Damley-Strnad", is_teacher: true, school_id: nightingale.id)
 
-User.create(email: "arya@test.com", school_id: winterfell.id, username: "aryastark", password: "test", password_confirmation: "test", firstname: "Arya", lastname: "Stark");
-User.create(email: "ned@test.com", school_id: winterfell.id, username: "nedstark", password: "test", password_confirmation: "test", firstname: "Ned", lastname: "Stark");
-User.create(email: "rob@test.com", school_id: winterfell.id, username: "robstark", password: "test", password_confirmation: "test", firstname: "Rob", lastname: "Stark");
+User.create(email: "dumbledore@test.com", password: "test", password_confirmation: "test", pin: 'dumb', firstname: "Albus", lastname: "Dumbledore", is_teacher: true, school_id: hogwarts.id)
+User.create(email: "severus@test.com",    password: "test", password_confirmation: "test", pin: 'seve', firstname: "Severus", lastname: "Snape", is_teacher: true, school_id: hogwarts.id)
+User.create(email: "harry@test.com",      password: "test", password_confirmation: "test", pin: 'harr', firstname: "Harry", lastname: "Potter", is_teacher: false, school_id: hogwarts.id)
+User.create(email: "hermione@test.com",   password: "test", password_confirmation: "test", pin: 'herm', firstname: "Hermione", lastname: "Granger", is_teacher: false, school_id: hogwarts.id)
+User.create(email: "ron@test.com",        password: "test", password_confirmation: "test", pin: 'ronw', firstname: "Ron", lastname: "Weasley", is_teacher: false, school_id: hogwarts.id)
 
-User.create(email: "someone@nightingale.edu", school_id: nightingale.id, username: "someone", password: "1234", password_confirmation: "test", firstname: "somestudent", lastname: "yes");
-
-User.create(email: "adamleystrnad@nightingale.org", school_id: nightingale.id, username: "adamleystrnad", password: "1234", password_confirmation: "1234", firstname: "Alexandra", lastname: "Damley-Strnad");
+User.create(email: "ned@test.com",  password: "test", password_confirmation: "test", pin: 'ned', firstname: "Ned", lastname: "Stark", is_teacher: true, school_id: winterfell.id)
+User.create(email: "arya@test.com", password: "test", password_confirmation: "test", pin: 'arya', firstname: "Arya", lastname: "Stark", is_teacher: false, school_id: winterfell.id)
+User.create(email: "rob@test.com",  password: "test", password_confirmation: "test", pin: 'rob', firstname: "Rob", lastname: "Stark", is_teacher: false, school_id: winterfell.id)
