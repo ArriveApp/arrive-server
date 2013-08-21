@@ -15,7 +15,7 @@
           <% end %> 
         </ul>
         <div class="identification pull-right">
-          <%= current_user.username %><span class="school-name">@<%= current_user.school.name %></span>
+          <%= current_user.firstname %><span class="school-name">@<%= current_user.school.name %></span>
           <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'btn logout_button' %>
         </div>
       <% else %>

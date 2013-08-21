@@ -2,14 +2,14 @@
 
 FactoryGirl.define do
   factory :user do
-    sequence :username do |n|
-      "Griffindor#{n}"
-    end
     sequence :email do |n|
       "griffindor_#{n}@hogwarts.com"
     end
     password "pass"
     password_confirmation "pass"
+    sequence :pin do |n|
+      sprintf("%04d", n)
+    end
     school
   end
 end
