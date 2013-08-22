@@ -21,6 +21,7 @@ ArriveServer::Application.routes.draw do
         post :bulk_add
       end
     end
+    resource :pin, only: [:new]
   end
 
   root 'home#index'

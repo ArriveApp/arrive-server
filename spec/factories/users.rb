@@ -7,6 +7,8 @@ FactoryGirl.define do
     end
     password "pass"
     password_confirmation "pass"
+    firstname "harry"
+    lastname "potter"
     sequence :pin do |n|
       sprintf("%04d", n)
     end

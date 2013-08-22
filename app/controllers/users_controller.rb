@@ -5,8 +5,8 @@ class UsersController < ApplicationController
 
   def index
     @school = School.find(params[:school_id])
-    
-    @user = User.new(school: @school)
+
+    @user = User.new(school: @school, is_teacher: false)
     @users = @school.users.order(:firstname).order(:is_teacher)
   end
 

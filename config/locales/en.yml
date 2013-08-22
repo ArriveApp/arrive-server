@@ -32,3 +32,4 @@ en:
       user:
         firstname: 'First name'
         lastname: 'Last name'
+        pin: 'Pin'

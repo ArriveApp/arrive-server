@@ -1,9 +1,11 @@
 class User < ActiveRecord::Base
   devise :database_authenticatable, :token_authenticatable, :validatable
 
+  PIN_LENGTH = 4
+
   belongs_to :school
 
-  validates :pin, uniqueness: true
+  validates :pin, uniqueness: { scope: :school_id }, presence: true, length: {minimum: PIN_LENGTH, maximum: PIN_LENGTH}
   validates :firstname, presence: true
   validates :lastname, presence: true
 
@@ -13,6 +15,10 @@ class User < ActiveRecord::Base
 
   def role
     is_teacher? ? 'Teacher' : 'Student'
+  end
+
+  def self.pins_for_school school_id
+    select(:pin).where("school_id = #{school_id}").map(&:pin)
   end
 
   def as_json(options = {})
