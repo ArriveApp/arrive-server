@@ -14,11 +14,9 @@ class PinsController < ApplicationController
   end
 
   def generate_unique_pin pins
-    alpha_numerics = [('A'..'Z'),(0..9)].map{|i| i.to_a}.flatten
+    alpha_numerics = [('a'..'z'), ('A'..'Z'), (0..9)].map{|i| i.to_a}.flatten
     random_pin = random_alpha_numeric(alpha_numerics)
-    until !pins.include? random_pin do
-      random_pin = random_alpha_numeric
-    end
+    random_pin = random_alpha_numeric(alpha_numerics) until !pins.include? random_pin
     random_pin
   end
 end

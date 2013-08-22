@@ -19,6 +19,6 @@ User.create(email: "harry@test.com",      password: "test", password_confirmatio
 User.create(email: "hermione@test.com",   password: "test", password_confirmation: "test", pin: 'herm', firstname: "Hermione", lastname: "Granger", is_teacher: false, is_admin: false, school_id: hogwarts.id)
 User.create(email: "ron@test.com",        password: "test", password_confirmation: "test", pin: 'ronw', firstname: "Ron", lastname: "Weasley", is_teacher: false, is_admin: false, school_id: hogwarts.id)
 
-User.create(email: "ned@test.com",  password: "test", password_confirmation: "test", pin: 'ned', firstname: "Ned", lastname: "Stark", is_teacher: true, is_admin: false, school_id: winterfell.id)
+User.create(email: "ned@test.com",  password: "test", password_confirmation: "test", pin: 'ned1', firstname: "Ned", lastname: "Stark", is_teacher: true, is_admin: false, school_id: winterfell.id)
 User.create(email: "arya@test.com", password: "test", password_confirmation: "test", pin: 'arya', firstname: "Arya", lastname: "Stark", is_teacher: false, is_admin: false, school_id: winterfell.id)
-User.create(email: "rob@test.com",  password: "test", password_confirmation: "test", pin: 'rob', firstname: "Rob", lastname: "Stark", is_teacher: false, is_admin: false, school_id: winterfell.id)
+User.create(email: "rob@test.com",  password: "test", password_confirmation: "test", pin: 'rob1', firstname: "Rob", lastname: "Stark", is_teacher: false, is_admin: false, school_id: winterfell.id)

@@ -17,7 +17,9 @@
         <%= f.email_field :email %>
 
         <%= f.label :pin, class: "control-label" %>
-        <%= f.password_field :password %>
+        <%= f.text_field :password, maxlength: User::PIN_LENGTH %>
+
+        <%= button_tag "Generate a random pin", id: 'generate-pin', type: 'button', class: 'btn', :'data-id' => params[:school_id]%>
       </div>
 
       <div class="controls-row">
@@ -29,9 +31,9 @@
   <% end %>
 
   <%= form_tag bulk_add_school_users_path(@school), multipart: true, class: 'form-inline well' do %>
-       <%= file_field_tag :file, title: "Select file to upload" %>
+       <%= file_field_tag :file, title: "Choose a file to upload" %>
 
-       <%= submit_tag "Bulk upload users", class: "btn btn-primary" %>
+       <%= submit_tag "Add users", class: "btn btn-primary" %>
   <% end %>
 
   <table class="table table-striped">
@@ -39,6 +41,7 @@
         <th>Name</th>
         <th>Email</th>
         <th>Role</th>
+        <th>Pin</th>
     </thead>
     <tbody>
     <% @users.each do |user| %>
@@ -46,6 +49,7 @@
           <td><%= user.full_name %></td>
           <td><%= user.email %></td>
           <td><%= user.role %></td>
+          <td><%= user.pin %></td>
         </tr>
     <% end %>
     </tbody>
