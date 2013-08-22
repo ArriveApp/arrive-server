@@ -5,7 +5,7 @@ deploy:
   provider: heroku
   api_key:
     secure: RhABAvmQ2AyBYCzJ54fPzNY5Fhb10HTsNiTEYMGBSSXazyc1Ctr1p8Eid1puoLV8bHzh4GlfAA0iccoP7ioI2l950D6LLoqgakf+uOUv+TCpjQ2J8MaaIh+CbHRGsHtBL9cZ51GUQ2GA2Cx2M+fH1TWAG3wTIzCgA9vAob9nahY=
-  app: arrive-server-dev-2
+  app: arrive-server
   on:
     repo: ArriveApp/arrive-server
   run:
