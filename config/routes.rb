@@ -4,8 +4,8 @@ ArriveServer::Application.routes.draw do
   namespace :api do
     resource :session, only: :create
 
-    resources :schools, only: :index do
-      resources :courses, only: :index do
+    resources :schools, only: [] do
+      resources :courses, only: [] do
         resource :check_in, only: :create
       end
     end
@@ -21,7 +21,7 @@ ArriveServer::Application.routes.draw do
         post :bulk_add
       end
     end
-    resource :pin, only: [:new]
+    resource :pin, only: :new
   end
 
   root 'home#index'
