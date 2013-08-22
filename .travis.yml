@@ -1,11 +1,11 @@
 language: ruby
 rvm:
-- 2.0.0
+  - 2.0.0
 deploy:
   provider: heroku
   api_key:
-    secure: U3f0j87+Vh5zgr4KK+w+8A4U37ACGn3ul18czXU/Uoloiv/WUi9PMBpX+TyoyIAwtdSSZWZSBuU5pOiF5L4NhfdAK1Bgo4SqsUTPLHQay/4MQSClBK3qP5zdOpRXG8VEbApLYabs5hJAH2lkGo379BzzsATAlkyrurqTucLOu1Y=
-  app: arrive-server-dev
+    secure: RhABAvmQ2AyBYCzJ54fPzNY5Fhb10HTsNiTEYMGBSSXazyc1Ctr1p8Eid1puoLV8bHzh4GlfAA0iccoP7ioI2l950D6LLoqgakf+uOUv+TCpjQ2J8MaaIh+CbHRGsHtBL9cZ51GUQ2GA2Cx2M+fH1TWAG3wTIzCgA9vAob9nahY=
+  app: arrive-server-dev-2
   on:
     repo: ArriveApp/arrive-server
   run:
