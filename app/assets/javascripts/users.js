@@ -1,4 +1,4 @@
-$(function() {
+document.addEventListener("page:load", function(){
   $('input[type=file]').bootstrapFileInput();
 
   $('#generate-pin').click(function(){
