@@ -1,6 +1,9 @@
-<div class="model-error-messages">
-   <% error_messages(model).each do |error_message| %>
-      <div class='alert alert-error'><%= error_message %></div>
-  <% end %>
-</div>
+<% errors = error_messages(model) %>
 
+<% if errors.any? %>
+    <div class="model-error-messages">
+       <% errors.each do |error_message| %>
+          <div class='alert alert-error'><%= error_message %></div>
+      <% end %>
+    </div>
+<% end %>

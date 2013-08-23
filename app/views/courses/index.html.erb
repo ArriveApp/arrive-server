@@ -1,26 +1,31 @@
-<% active_page_is :course_management %>
+<% active_page_is :class_management %>
 
-<%= render partial: 'shared/errors', locals: { model: @course } %>
 <div class='text-center'>
   <%= form_for [@school, @course], html: {class: 'form-inline well'} do |f| %>
-      <%= f.label :name, 'Course' %>
-      <%= f.text_field :name %>
+      <%= render partial: 'shared/errors', locals: { model: @course } %>
 
-      <%= f.submit value: 'Add Class', class: 'btn btn-primary' %>
+      <%= f.label :name, 'Class' %>
+      <%= f.text_field :name, autofocus: true %>
+
+      <%= f.submit value: 'Add Class', class: 'btn btn-primary submit' %>
   <% end %>
 </div>
 
-<table class="table table-striped">
-  <thead>
-  <tr>
-    <th>Class Name</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% @courses.each do |course| %>
+<% if @courses.any? %>
+    <table class="table table-striped">
+      <thead>
       <tr>
-        <td><%= course.name %></td>
+        <th>Class Name</th>
       </tr>
-  <% end %>
-  </tbody>
-</table>
+      </thead>
+      <tbody>
+      <% @courses.each do |course| %>
+          <tr>
+            <td><%= course.name %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+<% else %>
+    <%= render partial: 'shared/help_text', locals: {help_text: 'No classes yet. Use the form above to create classes for your school'} %>
+<% end %>

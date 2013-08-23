@@ -14,14 +14,14 @@ class CoursesController < ApplicationController
     @course = Course.new(name: params[:course][:name], school_id: school_id)
 
   	if @course.save
-  		redirect_to school_courses_path(school_id: school_id), notice: 'Course was created successfully'
+  		redirect_to school_courses_path(school_id: school_id), notice: 'Class was created successfully'
   	else
-      logger.info("Attempt to save course with name: '#{@course.name}' failed.")
+      logger.info("Attempt to save class with name: '#{@course.name}' failed.")
 
       @school = School.find(school_id)
       @courses = @school.courses
 
-      flash.now[:alert] = 'Failed to create a course.'
+      flash.now[:alert] = 'Failed to create a class.'
       render :index
   	end
   end
