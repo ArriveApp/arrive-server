@@ -1,38 +1,42 @@
 <% active_page_is :reports %>
 
 <div>
-  <%= form_tag(school_reports_path(params[:school_id]), method: 'get', html: {class: 'form-inline well'}) do |form| %>
+  <%= form_tag(school_reports_path(params[:school_id]), method: 'get', class: 'form-inline well') do %>
       <%= label_tag :from %>
       <div class="input-append date" data-date="<%= @from_date %>" data-date-format="mm-dd-yyyy" data-ui="datepicker">
         <%=text_field_tag :from, @from, class:"span2", size:"16"%>
         <span class="add-on"><i class="icon-th"></i></span>
       </div>
 
-      <%= label_tag :to %>
+      <%= label_tag :to, nil, class: 'checkins-to' %>
       <div class="input-append date" data-date="<%= @to_date %>" data-date-format="mm-dd-yyyy" data-ui="datepicker">
         <%=text_field_tag :to, @to, class:"span2", size:"16"%>
         <span class="add-on"><i class="icon-th"></i></span>
       </div>
 
-      <%= submit_tag 'Run Report', class: 'btn btn-primary', name: nil %>
+      <%= submit_tag 'Run Report', class: 'btn btn-primary run-report', name: nil %>
   <% end %>
 
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th>Name</th>
-      <th>Class</th>
-      <th>Time</th>
-    </tr>
-    </thead>
-    <tbody>
-        <% @check_ins.each do |check_in| %>
-            <tr>
-              <td><%= check_in.user.full_name %></td>
-              <td><%= check_in.course.name %></td>
-              <td><%= format_timestamp(check_in.created_at.to_s) %></td>
-            </tr>
-        <% end %>
-    </tbody>
-  </table>
+  <% if @check_ins.any? %>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Class</th>
+          <th>Time</th>
+        </tr>
+        </thead>
+        <tbody>
+            <% @check_ins.each do |check_in| %>
+                <tr>
+                  <td><%= check_in.user.full_name %></td>
+                  <td><%= check_in.course.name %></td>
+                  <td><%= format_timestamp(check_in.created_at.to_s) %></td>
+                </tr>
+            <% end %>
+        </tbody>
+      </table>
+   <% else %>
+      <p class="lead text-center">No check ins found. Try widening your search dates.</p>
+   <% end %>
 </div>
