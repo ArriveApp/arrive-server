@@ -16,9 +16,9 @@ describe PinsController do
       existing_pins = ['1234', '5678']
       User.should_receive(:pins_for_school).with(school_id) { existing_pins }
 
-      pin_generator = double(UniquePinGenerator)
+      pin_generator = double(ArriveServer::UniquePinGenerator)
       pin_generator.stub(:next) { 'abcd' }
-      UniquePinGenerator.should_receive(:new).with(existing_pins, User::PIN_LENGTH) { pin_generator }
+      ArriveServer::UniquePinGenerator.should_receive(:new).with(existing_pins, User::PIN_LENGTH) { pin_generator }
 
       get :new, school_id: school_id
 
