@@ -1,3 +1,3 @@
-document.addEventListener("page:load", function(){
+$(document).on("ready page:load", function(){
   $('*[data-ui="datepicker"]').datepicker();
 });
