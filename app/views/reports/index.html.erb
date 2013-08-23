@@ -37,6 +37,6 @@
         </tbody>
       </table>
    <% else %>
-      <p class="lead text-center">No check ins found. Try widening your search dates.</p>
+      <%= render partial: 'shared/help_text', locals: {help_text: 'No check ins found. Try widening your search dates.'} %>
    <% end %>
 </div>
