@@ -1,15 +1,13 @@
 <% active_page_is :class_management %>
 
-<div class='text-center'>
-  <%= form_for [@school, @course], html: {class: 'form-inline well'} do |f| %>
-      <%= render partial: 'shared/errors', locals: { model: @course } %>
+<%= form_for [@school, @course], html: {class: 'form-inline well text-center'} do |f| %>
+    <%= render partial: 'shared/errors', locals: {model: @course} %>
 
-      <%= f.label :name, 'Class' %>
-      <%= f.text_field :name, autofocus: true %>
+    <%= f.label :name, 'Class' %>
+    <%= f.text_field :name, autofocus: true %>
 
-      <%= f.submit value: 'Add Class', class: 'btn btn-primary submit' %>
-  <% end %>
-</div>
+    <%= f.submit value: 'Add Class', class: 'btn btn-primary submit' %>
+<% end %>
 
 <% if @courses.any? %>
     <table class="table table-striped">
@@ -27,5 +25,5 @@
       </tbody>
     </table>
 <% else %>
-    <%= render partial: 'shared/help_text', locals: {help_text: 'No classes yet. Use the form above to create classes for your school'} %>
+    <%= render partial: 'shared/help_text', locals: {help_text: 'No classes yet. Use the form above to create classes for your school.'} %>
 <% end %>

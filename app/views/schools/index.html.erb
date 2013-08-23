@@ -1,27 +1,29 @@
 <% active_page_is :school_management %>
 
-<div class='text-center'>
-  <%= form_for @school, html: {class: 'form-inline well'} do |f| %>
-      <%= render partial: 'shared/errors', locals: {model: @school} %>
+<%= form_for @school, html: {class: 'form-inline well text-center'} do |f| %>
+    <%= render partial: 'shared/errors', locals: {model: @school} %>
 
-      <%= f.label :name, 'School' %>
-      <%= f.text_field :name %>
+    <%= f.label :name, 'School' %>
+    <%= f.text_field :name, autofocus: true %>
 
-      <%= f.submit class: 'btn btn-primary', value: 'Add School' %>
-  <% end %>
-</div>
+    <%= f.submit class: 'btn btn-primary submit', value: 'Add School' %>
+<% end %>
 
-<table class="table table-striped">
-  <thead>
-  <tr>
-    <th>School Name</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% @schools.each do |school| %>
+<% if @schools.any? %>
+    <table class="table table-striped">
+      <thead>
       <tr>
-        <td><%= school.name %></td>
+        <th>School Name</th>
       </tr>
-  <% end %>
-  </tbody>
-</table>
+      </thead>
+      <tbody>
+      <% @schools.each do |school| %>
+          <tr>
+            <td><%= school.name %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+<% else %>
+    <%= render partial: 'shared/help_text', locals: {help_text: 'No schools yet. Use the form above to create schools.'} %>
+<% end %>

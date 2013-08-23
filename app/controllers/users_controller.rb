@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     params.permit!
     @user = User.new(params[:user].merge(school_id: params[:school_id], pin: params[:user][:password]))
     if @user.save
-      redirect_to school_users_path(school_id: params[:school_id]), notice: "User was created successfully."
+      redirect_to school_users_path(school_id: params[:school_id]), notice: "User was created successfully"
       return
     end
 

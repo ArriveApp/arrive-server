@@ -20,7 +20,7 @@ describe UsersController do
       post 'create', user: {firstname: 'chris', lastname: 'george', email: 'email@email.com', password: '1234'}, school_id: @school.id
       
       expect(User.count).to be 1
-      flash[:notice].should == 'User was created successfully.'
+      flash[:notice].should == 'User was created successfully'
     end
 
     it "should set the password as the pin when creating a user" do
