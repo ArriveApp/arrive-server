@@ -5,7 +5,9 @@ class User < ActiveRecord::Base
 
   belongs_to :school
 
-  validates :pin, uniqueness: { scope: :school_id }, presence: true, length: {minimum: PIN_LENGTH, maximum: PIN_LENGTH}
+  validates :pin, uniqueness: { scope: :school_id },
+                  presence: true,
+                  length: {minimum: PIN_LENGTH, maximum: PIN_LENGTH, allow_blank: true}
   validates :firstname, presence: true
   validates :lastname, presence: true
 
