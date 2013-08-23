@@ -19,7 +19,7 @@
         <%= f.label :pin, class: "control-label" %>
         <%= f.text_field :password, maxlength: User::PIN_LENGTH %>
 
-        <%= button_tag "Generate a random pin", id: 'generate-pin', type: 'button', class: 'btn', :'data-id' => params[:school_id]%>
+        <%= button_tag "Generate a random pin", id: 'generate_pin', type: 'button', class: 'btn', data: {'new-pin-url' => new_school_pin_path(school_id: @school.id), 'password-field' => 'user_password'} %>
       </div>
 
       <div class="controls-row">

@@ -1,28 +1,16 @@
 require 'spec_helper'
 
 describe User do
-
   describe '.pins_for_school' do
-    it "should give all the pins for the specific school" do
-      school = FactoryGirl.create(:school)
-      user1 = FactoryGirl.create(:user, school: school)
-      user2 = FactoryGirl.create(:user, school: school)
+    it "returns all the pins for the specific school" do
+      FactoryGirl.create(:user, pin: '1234', school_id: '1')
+      FactoryGirl.create(:user, pin: '5678', school_id: '1')
 
-      pins = User.pins_for_school school.id
+      FactoryGirl.create(:user, pin: 'abcd', school_id: '2')
 
-      pins.should =~ [user1.pin, user2.pin]
+      pins = User.pins_for_school('1')
+
+      expect(pins).to eq(['1234', '5678'])
     end
-
-    it "should not get pins from other schools" do
-      school1 = FactoryGirl.create(:school)
-      school2 = FactoryGirl.create(:school)
-      user1 = FactoryGirl.create(:user, school: school1)
-      FactoryGirl.create(:user, school: school2)
-
-      pins = User.pins_for_school school1.id
-
-      pins.should =~ [user1.pin]
-    end
-
   end
 end

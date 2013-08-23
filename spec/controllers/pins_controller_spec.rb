@@ -5,18 +5,25 @@ describe PinsController do
     stub_sign_in
   end
 
-  describe "#new" do
-    it "should generate a random unique pin" do
-      existing_pins = ["1234", "ABCD", "AB12"]
-      school_id = "1"
-      User.should_receive(:pins_for_school).with(school_id).and_return(existing_pins)
+  describe '#new' do
+    let(:school_id) { '1' }
+
+    before do
+      User.stub(:pins_for_school)
+    end
+
+    it 'returns the next pin from the pin generator' do
+      existing_pins = ['1234', '5678']
+      User.should_receive(:pins_for_school).with(school_id) { existing_pins }
+
+      pin_generator = double(UniquePinGenerator)
+      pin_generator.stub(:next) { 'abcd' }
+      UniquePinGenerator.should_receive(:new).with(existing_pins, User::PIN_LENGTH) { pin_generator }
 
       get :new, school_id: school_id
 
-      response_hash = JSON.parse(response.body)
-      pin = response_hash['pin']
-      pin.length.should == User::PIN_LENGTH
-      existing_pins.should_not include pin
+      expect(response.body).to eq({pin: 'abcd'}.to_json)
     end
+
   end
 end

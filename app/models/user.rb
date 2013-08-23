@@ -9,16 +9,17 @@ class User < ActiveRecord::Base
   validates :firstname, presence: true
   validates :lastname, presence: true
 
+  def self.pins_for_school school_id
+    select(:pin).where(school_id: school_id).map(&:pin)
+  end
+
+
   def full_name
     "#{firstname} #{lastname}"
   end
 
   def role
     is_teacher? ? 'Teacher' : 'Student'
-  end
-
-  def self.pins_for_school school_id
-    select(:pin).where("school_id = #{school_id}").map(&:pin)
   end
 
   def as_json(options = {})
