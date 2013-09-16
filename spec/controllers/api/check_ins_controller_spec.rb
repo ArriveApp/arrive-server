@@ -67,6 +67,7 @@ describe Api::CheckInsController do
       it 'creates a check in for the user with the specified pin' do
         User.should_receive(:find_by).with(pin: pin) { user_with_pin }
 
+        CheckIn.should_receive(:where).and_return([])
         CheckIn.should_receive(:create).with(course_id: course_id, user_id: user_with_pin_id, school_id: school_id)
 
         post_to_create(pin: pin)
@@ -80,18 +81,47 @@ describe Api::CheckInsController do
 
         expect(response.status).to eq(401)
       end
+
+
+      it 'returns a 201' do
+        user.stub(:firstname) { 'Ned Stark' }
+        controller.stub(:current_user) { user }
+
+        post_to_create
+
+        expect(response.status).to eq(201)
+        expect(response.body).to eq({firstname: 'Ned Stark'}.to_json)
+      end
+
+
+      context 'student has checked in in the last 45 minutes' do
+        let(:old_check_in) {
+          CheckIn.new( course_id: course_id, user_id: user_with_pin_id, school_id: school_id, created_at: 40.minutes.ago)
+        }
+
+        before :each do
+          CheckIn.should_receive(:where).and_return([ old_check_in ])
+          Course.should_receive(:find).and_return( course_to_check_in )
+        end
+
+        it 'its unauthorized'  do
+          post_to_create
+          expect(response.status).to eq(401)
+        end
+
+      end
+
+
+
+
     end
 
-    it 'returns a 201' do
-      user.stub(:firstname) { 'Ned Stark' }
-      controller.stub(:current_user) { user }
 
-      post_to_create
 
-      expect(response.status).to eq(201)
-      expect(response.body).to eq({firstname: 'Ned Stark'}.to_json)
-    end
+
+
+
 
   end
 
-end
+  end
