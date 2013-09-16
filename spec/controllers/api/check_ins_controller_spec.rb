@@ -12,6 +12,8 @@ describe Api::CheckInsController do
     let(:user_id) { 3 }
 
     let(:user) { User.new(id: user_id) }
+    let(:course_to_check_in) {Course.new(id: course_id, name: "Course name")}
+
 
     before do
       stub_sign_in
@@ -21,13 +23,40 @@ describe Api::CheckInsController do
     end
 
     context 'check in with no pin' do
+
       it 'creates a check in for the current user' do
         controller.stub(:current_user) { user }
 
+        CheckIn.should_receive(:where).and_return([])
         CheckIn.should_receive(:create).with(course_id: course_id, user_id: user_id, school_id: school_id)
+
 
         post_to_create
       end
+
+
+      context 'student has checked in in the last 45 minutes' do
+        let(:old_check_in) {
+          CheckIn.new( course_id: course_id, user_id: user_id, school_id: school_id, created_at: 40.minutes.ago)
+        }
+
+
+        before :each do
+          CheckIn.should_receive(:where).and_return([ old_check_in ])
+          Course.should_receive(:find).and_return( course_to_check_in )
+        end
+
+        it 'its unauthorized'  do
+          post_to_create
+          expect(response.status).to eq(401)
+        end
+
+
+
+      end
+
+
+
     end
 
     context 'check in with a pin' do
