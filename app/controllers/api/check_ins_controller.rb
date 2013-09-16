@@ -17,24 +17,24 @@ module Api
 
       end
 
-      time = Time.now   -  45*60
+      checkIn = CheckIn.where(user_id: user.id, course_id: params[:course_id], school_id: params[:school_id]).last
 
-      checkIn = CheckIn.where("course_id = :course_id AND user_id = :user_id AND school_id = :school_id AND created_at >= :time",
-                              {course_id: params[:course_id], user_id: user.id, school_id: params[:school_id], time: time})
+      if checkIn.nil?  or checkIn.created_at < 45.minutes.ago
 
-      if checkIn.count == 0
         CheckIn.create(course_id: params[:course_id], user_id: user.id, school_id: params[:school_id])
-        render json: {success: true,firstname: user.firstname}, status: :created
+        render json: {firstname: user.firstname}, status: :created
+
       else
-        course_id = params[:course_id]
-        courseToCheckIn = Course.find(course_id)
-        render json: {success: false, error_message: "Sorry! You have already checked in to " + courseToCheckIn.name } , status: :unauthorized
+
+        course = Course.find(params[:course_id])
+        render json: {success: false, error_message: "Sorry! You have already checked in " + course.name} , status: :unauthorized
+
 
       end
 
   end
-
-
-  end
+    end
 
 end
+
+
