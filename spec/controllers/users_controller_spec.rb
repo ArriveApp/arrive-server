@@ -17,7 +17,7 @@ describe UsersController do
   
   describe "POST create" do
     it "should create a new user" do
-      post 'create', user: {firstname: 'chris', lastname: 'george', email: 'email@email.com', password: '1234'}, school_id: @school.id
+      post 'create', user: {firstname: 'chris', lastname: 'george', email: 'email@email.com', password: '1234', courses: '1|2'}, school_id: @school.id
       
       expect(User.count).to be 1
       flash[:notice].should == 'User was created successfully'
@@ -26,7 +26,7 @@ describe UsersController do
     it "should set the password as the pin when creating a user" do
       User.should_receive(:new).with(hash_including(pin: '1234')) { double(User).as_null_object }
 
-      post 'create', user: {firstname: 'chris', lastname: 'george', email: 'email@email.com', password: '1234'}, school_id: @school.id
+      post 'create', user: {firstname: 'chris', lastname: 'george', email: 'email@email.com', password: '1234', courses: '2|4'}, school_id: @school.id
     end
     
     it "should not create an invalid user" do
@@ -35,6 +35,8 @@ describe UsersController do
       expect(User.count).to be 0
       flash[:alert].should == "Failed to create user"
     end
+
+
   end
   
   describe "POST bulk_add" do
