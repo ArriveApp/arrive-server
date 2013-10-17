@@ -8,11 +8,19 @@ class UsersController < ApplicationController
 
     @user = User.new(school: @school, is_teacher: false)
     @users = @school.users.order(:firstname).order(:is_teacher)
+    @courses = @school.courses.order(:name)
   end
 
   def create
     params.permit!
-    @user = User.new(params[:user].merge(school_id: params[:school_id], pin: params[:user][:password]))
+
+    courses_to_attend = ""
+    if ! params[:courses_ids].nil?
+      courses_to_attend = params[:courses_ids].join("|")
+    end
+
+    @user = User.new(params[:user].merge(school_id: params[:school_id], pin: params[:user][:password], courses: courses_to_attend))
+
     if @user.save
       redirect_to school_users_path(school_id: params[:school_id]), notice: "User was created successfully"
       return
@@ -26,6 +34,7 @@ class UsersController < ApplicationController
     flash.now[:alert] = "Failed to create user"
     render :index
   end
+
   
   def bulk_add
     users = CSV.parse(params[:file].read, :headers => true)

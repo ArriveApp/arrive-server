@@ -10,9 +10,6 @@
           <li class="<%= nav_class_for(:reports) %>"><%= link_to 'Reports', school_reports_path(school_id: current_user.school.id) %></li>
           <li class="<%= nav_class_for(:user_management) %>"><%= link_to 'User Management', school_users_path(school_id: current_user.school.id) %></li>
           <li class="<%= nav_class_for(:class_management) %>"><%= link_to 'Class Management', school_courses_path(school_id: current_user.school.id) %></li>
-          <% if current_user.is_admin %>
-            <li class="<%= nav_class_for(:school_management) %>"><%= link_to 'School Management', schools_path %></li> 
-          <% end %> 
         </ul>
         <div class="identification pull-right">
           <%= current_user.firstname %><span class="school-name">@<%= current_user.school.name %></span>

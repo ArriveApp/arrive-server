@@ -2,13 +2,26 @@
 
 
 <%= form_tag(school_reports_path(params[:school_id]), method: 'get', class: 'form-inline well') do %>
-    <%= label_tag :from %>
+
+   <%= label_tag :report %>
+
+    <select  name="report" id="report"   >
+      <option value="0">Select report</option>
+      <option value="1">Student with check ins</option>
+      <option value="2">Student without check ins</option>
+    </select>
+
+
+    <%= label_tag :course, nil, class: 'label-report'  %>
+    <%= select_tag "course", options_from_collection_for_select(@courses, "id", "name"), prompt: "Select class" %>
+
+    <%= label_tag :from, nil, class: 'label-report'  %>
     <div class="input-append date" data-date="<%= @from_date %>" data-date-format="mm-dd-yyyy" data-ui="datepicker">
       <%= text_field_tag :from, @from, class: "span2", size: "16" %>
       <span class="add-on"><i class="icon-th"></i></span>
     </div>
 
-    <%= label_tag :to, nil, class: 'checkins-to' %>
+    <%= label_tag :to, nil, class: 'label-report' %>
     <div class="input-append date" data-date="<%= @to_date %>" data-date-format="mm-dd-yyyy" data-ui="datepicker">
       <%= text_field_tag :to, @to, class: "span2", size: "16" %>
       <span class="add-on"><i class="icon-th"></i></span>
@@ -17,7 +30,12 @@
     <%= submit_tag 'Run Report', class: 'btn btn-primary submit', name: nil %>
 <% end %>
 
+<% if @report == 1 %>
+
 <% if @check_ins.any? %>
+   <div class="list-report">
+
+    <label class="control-label"> Students with check ins</label>
     <table class="table table-striped">
       <thead>
       <tr>
@@ -36,7 +54,36 @@
       <% end %>
       </tbody>
     </table>
+   </div>
 <% else %>
     <%= render partial: 'shared/help_text', locals: {help_text: 'No check ins found. Try widening your search dates.'} %>
+<% end %>
+
+<% end %>
+
+
+<% if @report == 2 %>
+
+        <% if @students_no_check_in.any? %>
+         <div class="list-report">
+            <label class="control-label"> Students without check ins </label>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% @students_no_check_in.each do |student| %>
+                    <tr>
+                        <td><%= student.full_name %></td>
+                    </tr>
+                <% end %>
+                </tbody>
+            </table>
+         </div>
+        <% else %>
+            <%= render partial: 'shared/help_text', locals: {help_text: 'No students without check ins found. Try widening your search dates.'} %>
+        <% end %>
 <% end %>
 
