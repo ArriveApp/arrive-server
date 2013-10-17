@@ -12,7 +12,7 @@ module ApplicationHelper
   end
 
   def format_timestamp(timestamp)
-    DateTime.parse(timestamp).strftime('%b, %d, %Y %I:%M %p')
+    DateTime.parse(timestamp).strftime('%b, %d, %Y %I:%M %p %Z')
   end
 
 end

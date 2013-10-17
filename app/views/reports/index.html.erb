@@ -31,7 +31,7 @@
           <tr>
             <td><%= check_in.user.full_name %></td>
             <td><%= check_in.course.name %></td>
-            <td><%= format_timestamp(check_in.created_at.to_s) %></td>
+            <td><time datetime="<%=(check_in.created_at.to_time.iso8601.to_s) %>" data-format="MMM, DD, YYYY hh:mm A"><%=format_timestamp(check_in.created_at.to_s)%></time></td>
           </tr>
       <% end %>
       </tbody>
