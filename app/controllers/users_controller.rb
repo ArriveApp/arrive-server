@@ -5,17 +5,18 @@ class UsersController < ApplicationController
 
   def index
     @school = School.find(params[:school_id])
-
     @user = User.new(school: @school, is_teacher: false)
+
     @users = @school.users.order(:firstname).order(:is_teacher)
     @courses = @school.courses.order(:name)
+
   end
 
   def create
     params.permit!
-
     courses_to_attend = ""
-    if ! params[:courses_ids].nil?
+
+    if !params[:courses_ids].nil?
       courses_to_attend = params[:courses_ids].join("|")
     end
 
@@ -25,17 +26,15 @@ class UsersController < ApplicationController
       redirect_to school_users_path(school_id: params[:school_id]), notice: "User was created successfully"
       return
     end
-
     logger.info("Failed to create user!")
-
     @school = School.find(params[:school_id])
     @users = @school.users.order(:firstname).order(:is_teacher)
+    @courses = @school.courses.order(:name)
 
     flash.now[:alert] = "Failed to create user"
     render :index
   end
 
-  
   def bulk_add
     users = CSV.parse(params[:file].read, :headers => true)
     users.each do |row|
@@ -45,4 +44,5 @@ class UsersController < ApplicationController
   rescue
     redirect_to school_users_path(params[:school_id]), alert: "Invalid CSV file uploaded"
   end
+
 end

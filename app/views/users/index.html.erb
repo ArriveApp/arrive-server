@@ -26,31 +26,32 @@
       <%= f.check_box :is_teacher %>
     </div>
 
-
     <div class="controls-row">
 
-      <%= f.label 'Select classes to attend:', class: 'control-label'%>
+      <%= f.label 'Select classes to attend:', class: 'control-label' %>
 
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>Class Name</th>
-            </tr>
-            </thead>
-            <tbody>
-            <% @courses.each do |course| %>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Class Name</th>
+        </tr>
+        </thead>
+
+        <tbody>
+            <% @courses.each do |course|%>
                 <tr>
-                    <td>
-                        <%= check_box_tag 'courses_ids[]', course.id -%>
-                        <%=  course.name -%>
-                    </td>
+                  <td>
+                   <%= check_box_tag 'courses_ids[]', course.id -%>
+                   <%= course.name%>
+                  </td>
                 </tr>
             <% end %>
-            </tbody>
-        </table>
 
+        </tbody>
+
+
+      </table>
     </div>
-
     <%= f.submit "Add User", class: "btn btn-primary" %>
 <% end %>
 

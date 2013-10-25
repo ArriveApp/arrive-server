@@ -13,4 +13,6 @@ describe User do
       expect(pins).to eq(['1234', '5678'])
     end
   end
+
+
 end
