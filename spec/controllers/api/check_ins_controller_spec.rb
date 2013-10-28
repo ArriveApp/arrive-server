@@ -10,9 +10,10 @@ describe Api::CheckInsController do
     let(:school_id) { '1' }
     let(:course_id) { '2' }
     let(:user_id) { 3 }
+    let(:another_course_id) { '4' }
 
     let(:user) { User.new(id: user_id) }
-    let(:course_to_check_in) {Course.new(id: course_id, name: "Course name")}
+    let(:course_to_check_in) { Course.new(id: course_id, name: "Course name") }
 
 
     before do
@@ -33,29 +34,38 @@ describe Api::CheckInsController do
 
         post_to_create
       end
+    end
 
+    context 'student has checked in another course in the last 30 minutes' do
+      let(:old_check_in) {
+        CheckIn.new(course_id: another_course_id, user_id: user_id, school_id: school_id, created_at: 29.minutes.ago)
+      }
 
-      context 'student has checked in in the last 45 minutes' do
-        let(:old_check_in) {
-          CheckIn.new( course_id: course_id, user_id: user_id, school_id: school_id, created_at: 40.minutes.ago)
-        }
-
-
-        before :each do
-          CheckIn.should_receive(:where).and_return([ old_check_in ])
-          Course.should_receive(:find).and_return( course_to_check_in )
-        end
-
-        it 'its unauthorized'  do
-          post_to_create
-          expect(response.status).to eq(401)
-        end
-
-
-
+      before :each do
+        CheckIn.should_receive(:where).and_return([old_check_in])
       end
 
+      it 'its unauthorized' do
+        post_to_create
+        expect(response.status).to eq(401)
+      end
 
+    end
+
+    context 'student has checked in the last 12 hours' do
+      let(:old_check_in) {
+        CheckIn.new(course_id: course_id, user_id: user_id, school_id: school_id, created_at: 11.hours.ago)
+      }
+
+      before :each do
+        CheckIn.should_receive(:where).and_return([old_check_in])
+        Course.should_receive(:find).and_return(course_to_check_in)
+      end
+
+      it 'its unauthorized' do
+        post_to_create
+        expect(response.status).to eq(401)
+      end
 
     end
 
@@ -96,15 +106,15 @@ describe Api::CheckInsController do
 
       context 'student has checked in in the last 45 minutes' do
         let(:old_check_in) {
-          CheckIn.new( course_id: course_id, user_id: user_with_pin_id, school_id: school_id, created_at: 40.minutes.ago)
+          CheckIn.new(course_id: course_id, user_id: user_with_pin_id, school_id: school_id, created_at: 40.minutes.ago)
         }
 
         before :each do
-          CheckIn.should_receive(:where).and_return([ old_check_in ])
-          Course.should_receive(:find).and_return( course_to_check_in )
+          CheckIn.should_receive(:where).and_return([old_check_in])
+          Course.should_receive(:find).and_return(course_to_check_in)
         end
 
-        it 'its unauthorized'  do
+        it 'its unauthorized' do
           post_to_create
           expect(response.status).to eq(401)
         end
@@ -112,16 +122,9 @@ describe Api::CheckInsController do
       end
 
 
-
-
     end
 
 
-
-
-
-
-
   end
 
-  end
+end
