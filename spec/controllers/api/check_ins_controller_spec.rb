@@ -75,7 +75,7 @@ describe Api::CheckInsController do
       let(:user_with_pin) { User.new(id: user_with_pin_id) }
 
       it 'creates a check in for the user with the specified pin' do
-        User.should_receive(:find_by).with(pin: pin) { user_with_pin }
+        User.should_receive(:find_by).with(pin: pin, is_deleted: false) { user_with_pin }
 
         CheckIn.should_receive(:where).and_return([])
         CheckIn.should_receive(:create).with(course_id: course_id, user_id: user_with_pin_id, school_id: school_id)
@@ -84,7 +84,7 @@ describe Api::CheckInsController do
       end
 
       it 'is unauthorized and does not create a check in if the pin is not valid' do
-        User.should_receive(:find_by).with(pin: pin) { nil }
+        User.should_receive(:find_by).with(pin: pin, is_deleted: false) { nil }
         CheckIn.should_not_receive(:create)
 
         post_to_create(pin: pin)

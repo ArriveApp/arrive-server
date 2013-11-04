@@ -5,7 +5,7 @@ module Api
     def create
       user = User.find_for_database_authentication(email: params[:session][:email])
 
-      if user.present? && user.valid_password?(params[:session][:password])
+      if user.present? && !user.is_deleted? && user.valid_password?(params[:session][:password])
         user.reset_authentication_token!
 
         response_body = {user: user,

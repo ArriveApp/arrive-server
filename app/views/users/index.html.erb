@@ -78,6 +78,12 @@
             <td><%= user.email %></td>
             <td><%= user.role %></td>
             <td><%= user.pin %></td>
+             <%if current_user.can_delete user%>
+                <td><%= link_to t('user.actions.delete'), school_users_path(school_id: @school.id, id: user.id), :method => :delete,
+                            :confirm => t('activerecord.attributes.user.messages.confirmation')%> </td>
+             <%else%>
+                <td></td>
+             <%end%>
           </tr>
       <% end %>
       </tbody>

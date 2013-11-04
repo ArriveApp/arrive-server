@@ -12,7 +12,7 @@ module Api
 
 
       if pin.present?
-        user = User.find_by(pin: pin)
+        user = User.find_by(pin: pin, :is_deleted => false)
 
         if user.nil?
           render json: {success: false, error_message: "Invalid PIN"}, status: :unauthorized

@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     @school = School.find(params[:school_id])
     @user = User.new(school: @school, is_teacher: false)
 
-    @users = @school.users.order(:firstname).order(:is_teacher)
+    @users = @school.users.where(:is_deleted => false).order(:firstname).order(:is_teacher)
     @courses = @school.courses.order(:name)
 
   end
@@ -45,4 +45,13 @@ class UsersController < ApplicationController
     redirect_to school_users_path(params[:school_id]), alert: "Invalid CSV file uploaded"
   end
 
+  def destroy
+    user_to_delete = User.find(params[:id])
+
+    if current_user.can_delete user_to_delete
+      User.find(params[:id]).update_attributes(:is_deleted => true)
+    end
+
+    redirect_to school_users_path(params[:school_id])
+  end
 end

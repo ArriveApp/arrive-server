@@ -60,4 +60,14 @@ describe UsersController do
     end
   end
 
+  describe "DELETE destroy user" do
+    it "delete users from the app" do
+      post 'create', user: {firstname: 'chris', lastname: 'george', email: 'email@email.com', password: '1234', is_teacher: false, courses: '1|2', id: 1}, school_id: @school.id
+      expect(User.count).to be 1
+
+      delete 'destroy', id: 1, school_id: @school.id
+      expect(User.find(1).is_deleted).to be_true
+    end
+  end
+
 end

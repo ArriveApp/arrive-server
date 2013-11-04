@@ -28,4 +28,21 @@ class User < ActiveRecord::Base
     default_options = {only: [:authentication_token, :is_teacher, :firstname]}
     super(default_options.merge(options))
   end
+
+  def can_delete(another_user)
+    if is_student or (id == another_user.id)
+      return false
+    end
+
+    if is_admin
+      return true
+    end
+
+    return another_user.is_student
+
+  end
+
+  def is_student
+    not is_admin and not is_teacher
+  end
 end
