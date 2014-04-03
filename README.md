@@ -66,3 +66,8 @@ Troubleshooting
     Referenced from: /Applications/Postgres.app/Contents/MacOS/lib/libpq.dylib
     Reason: image not found - /Users/dcam/.rvm/gems/ruby-2.0.0-p247@arrive/gems/pg-0.15.1/lib/pg_ext.bundle
     from /Users/dcam/.rvm/gems/ruby-2.0.0-p247@arrive/gems/pg-0.15.1/lib/pg.rb:4:in `<top (required)>'
+
+* This helped me with standalone postgress server
+  
+    >Here's the error message: connections on Unix domain socket "/var/pgsql_socket/.s.PGSQL.5432"?
+    >Here's a link that tells you how to solve it: http://jaygoldman.com/2012/11/fixing-postgres-connection-errors-on-mountain-lion/
