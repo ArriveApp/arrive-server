@@ -7,7 +7,7 @@
       <% if signed_in? %>
         <ul class="nav nav-pills">
           <li class="<%= nav_class_for(:dashboard) %>"><%= link_to 'Dashboard', root_path %></li>
-          <li class="<%= nav_class_for(:reports) %>"><%= link_to 'Reports', school_reports_path(school_id: current_user.school.id) %></li>
+          <li class="<%= nav_class_for(:reports) %>"><%= link_to 'Reports', new_school_report_path(school_id: current_user.school.id) %></li>
           <li class="<%= nav_class_for(:user_management) %>"><%= link_to 'User Management', school_users_path(school_id: current_user.school.id) %></li>
           <li class="<%= nav_class_for(:class_management) %>"><%= link_to 'Class Management', school_courses_path(school_id: current_user.school.id) %></li>
         </ul>

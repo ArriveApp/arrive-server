@@ -15,7 +15,7 @@ ArriveServer::Application.routes.draw do
 
   resources :schools, only: [:index, :create] do
     resources :courses, only: [:index, :create]
-    resources :reports, only: :index
+    resources :reports, only: [:new, :index]
 
     resource :users, only: :destroy do
       delete :destroy

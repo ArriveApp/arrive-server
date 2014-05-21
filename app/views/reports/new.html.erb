@@ -1,0 +1,30 @@
+<% active_page_is :reports %>
+
+<%= render partial: 'shared/errors', locals: {model: @report }%>
+
+<%= form_for @report, url: {action: "index"}, html: {id: "report-form", class: "form-inline well", method: "GET"} do |f| %>
+
+    <%= f.label :type, "Report" %>
+    <%= f.collection_select :type, Report::TYPES, :id, :value, prompt: "Select report" %>
+
+    <%= f.label :course_id, "Course", class: 'label-report' %>
+    <%= f.collection_select :course_id, @courses, :id, :name, prompt: "Select class" %>
+
+    <%= f.label :from, "From", class: 'label-report'  %>
+    <div class="input-append date" data-date="<%= @report.from %>" data-date-format="mm-dd-yyyy" data-ui="datepicker">
+      <%= f.text_field :from, class: "span2", size: "16" %>
+      <span class="add-on"><i class="icon-th"></i></span>
+    </div>
+
+    <%= f.label :to, "To", class: 'label-report' %>
+    <div class="input-append date" data-date="<%= @report.to %>" data-date-format="mm-dd-yyyy" data-ui="datepicker">
+      <%= f.text_field :to, class: "span2", size: "16" %>
+      <span class="add-on"><i class="icon-th"></i></span>
+    </div>
+
+    <%= f.submit 'Run Report', class: 'btn btn-primary submit', name: nil %>
+<% end %>
+
+<% if !@report.results.nil? %>
+  <%= render partial: "#{@report.type}", locals: {report: @report} %>
+<% end %>

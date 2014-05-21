@@ -1,0 +1,21 @@
+<% if report.results.any? %>
+  <div class="list-report">
+    <label class="control-label"> Students without check ins </label>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% report.results.each do |student| %>
+            <tr>
+                <td><%= student.full_name %></td>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+  </div>
+<% else %>
+    <%= render partial: 'shared/help_text', locals: {help_text: 'No students without check-ins found. Try widening your search dates.'} %>
+<% end %>
