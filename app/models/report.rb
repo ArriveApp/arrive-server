@@ -7,11 +7,16 @@ class Report
   Type = Struct.new :id, :value, :student_populator
 
   StudentsWithCheckins    = Proc.new do |report|
-    CheckIn.search_by_course(report.from, report.to, report.school_id, report.course_id)
+    if report.course_id.blank?
+      CheckIn.search_by(report.from, report.to, report.school_id)
+    else
+      CheckIn.search_by_course(report.from, report.to, report.school_id, report.course_id)
+    end
+
   end
 
   StudentsWithoutCheckins = Proc.new do |report|
-    students_with_check_in = CheckIn.search_by_course(report.from, report.to, report.school_id, report.course_id).select(:user_id).distinct
+    students_with_check_in = StudentsWithCheckins.call(report).select(:user_id).distinct
     User.where(is_teacher: false, is_admin:false, school_id: report.school_id).where.not(id: students_with_check_in)
   end
 
@@ -24,7 +29,6 @@ class Report
 
   validate do |report|
     report.errors.add(:base, "Report has to be selected") if type.blank?
-    report.errors.add(:base, "Course has to be selected") if course_id.blank?
   end
 
   def initialize school_id

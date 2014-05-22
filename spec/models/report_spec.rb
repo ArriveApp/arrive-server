@@ -28,41 +28,84 @@ describe Report do
       arya_checkin
     end
 
-    context "with students who checked in" do
-      let(:course_id) { dark_magic.id }
-      let(:type) { "students_with_checkins" }
+    context "with course_id supplied" do
+      context "with students who checked in" do
+        let(:course_id) { dark_magic.id }
+        let(:type) { "students_with_checkins" }
 
-      it "should find the checkins for the dates provided" do
-        report = Report.build attrs, hogwarts.id
-
-        report.populate_results
-
-        report.results.should =~ [snape_checkin, harry_checkin, dobby_checkin]
-      end
-
-      context "with different dates" do
-        let(:from) { yesterday.strftime('%m-%d-%Y')}
-
-        it "should exclude students who have not checked in for the requested dates" do
+        it "should find the checkins for the dates provided" do
           report = Report.build attrs, hogwarts.id
 
           report.populate_results
 
-          report.results.should =~ [dobby_checkin]
+          report.results.should =~ [snape_checkin, harry_checkin, dobby_checkin]
+        end
+
+        context "with different dates" do
+          let(:from) { yesterday.strftime('%m-%d-%Y')}
+
+          it "should exclude students who have not checked in for the requested dates" do
+            report = Report.build attrs, hogwarts.id
+
+            report.populate_results
+
+            report.results.should =~ [dobby_checkin]
+          end
+        end
+      end
+
+      context "without students who checked in" do
+        let(:course_id) { potions_magic.id }
+        let(:type) { "students_without_checkins" }
+
+        it "should find all the students in that school who have not checked in to the course in the given dates" do
+          report = Report.build attrs, hogwarts.id
+
+          report.populate_results
+
+          report.results.should =~ [snape_checkin.user, dobby_checkin.user, harry_checkin.user]
         end
       end
     end
 
-    context "without students who checked in" do
-      let(:course_id) { potions_magic.id }
-      let(:type) { "students_without_checkins" }
+    context "with no course_id supplied" do
+      let(:course_id) { nil }
 
-      it "should find all the students in that school who have not checked in to the course in the given dates" do
-        report = Report.build attrs, hogwarts.id
+      context "with students who checked in" do
+        let(:type) { "students_with_checkins" }
 
-        report.populate_results
+        it "should find the checkins for the dates provided" do
+          report = Report.build attrs, hogwarts.id
 
-        report.results.should =~ [snape_checkin.user, dobby_checkin.user, harry_checkin.user]
+          report.populate_results
+
+          report.results.should =~ [snape_checkin, harry_checkin, dobby_checkin, hermoine_checkin]
+        end
+
+        context "with different dates" do
+          let(:from) { yesterday.strftime('%m-%d-%Y')}
+
+          it "should exclude students who have not checked in for the requested dates" do
+            report = Report.build attrs, hogwarts.id
+
+            report.populate_results
+
+            report.results.should =~ [dobby_checkin, hermoine_checkin]
+          end
+        end
+      end
+
+      context "without students who checked in" do
+        let(:type) { "students_without_checkins" }
+        let(:from) { yesterday.strftime('%m-%d-%Y')}
+
+        it "should find all the students in that school who have not checked in to any course in the given dates" do
+          report = Report.build attrs, hogwarts.id
+
+          report.populate_results
+
+          report.results.should =~ [snape_checkin.user, harry_checkin.user]
+        end
       end
     end
   end
