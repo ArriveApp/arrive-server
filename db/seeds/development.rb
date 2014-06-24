@@ -10,7 +10,7 @@ Course.create(name: "Wolf Taming", school_id: winterfell.id)
 Course.create(name: "History of Night's Watch", school_id: winterfell.id)
 Course.create(name: "Archery", school_id: winterfell.id)
 
-# Admin user
+# Teacher user
 User.create(email: "adamleystrnad@nightingale.org", password: "1234", password_confirmation: "1234", pin: '1234', firstname: "Alexandra", lastname: "Damley-Strnad", is_teacher: true, is_admin: true, school_id: nightingale.id)
 
 User.create(email: "dumbledore@test.com", password: "test", password_confirmation: "test", pin: 'dumb', firstname: "Albus", lastname: "Dumbledore", is_teacher: true, is_admin: false, school_id: hogwarts.id)
