@@ -17,8 +17,12 @@ class ReportsController < ApplicationController
       @check_ins = CheckIn.search_by(@from, @to, school_id)
     elsif @report == 2  and course_id!= ""
 
-      students_with_check_in =   CheckIn.search_by_course(@from, @to,school_id,course_id).select(:user_id).distinct
-      @students_no_check_in = User.where(is_teacher: false, is_admin:false).where.not(id: students_with_check_in)
+      students_with_check_in = CheckIn.search_by_course(@from, @to,school_id,course_id).select(:user_id).distinct
+      student_ids = students_with_check_in.map(&:user_id) 
+      @students_no_check_in = User.where(is_teacher: false, is_admin:false).select do |s|
+        !student_ids.include?(s.id)
+      end
+      #.where.not(id: students_with_check_in)
 
     end
 

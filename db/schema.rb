@@ -51,7 +51,6 @@ ActiveRecord::Schema.define(version: 20131104122406) do
     t.boolean  "is_teacher",           default: true
     t.string   "pin"
     t.boolean  "is_admin",             default: false
-    t.text     "courses"
     t.boolean  "is_deleted",           default: false
   end
 
