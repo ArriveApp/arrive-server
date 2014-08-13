@@ -5,13 +5,10 @@ describe ReportsController do
   before do
     stub_sign_in
     @school = FactoryGirl.create(:school)
+    @course = FactoryGirl.create(:course)
   end
 
   describe 'report of check ins' do 
-
-    before do
-      @report = 1
-    end
 
     it "finds check ins using the search params in the request" do
       CheckIn.should_receive(:search_by).with('from', 'to', 1)
@@ -43,5 +40,14 @@ describe ReportsController do
         assigns(:students_no_check_in).should == [student2]
       end 
     end
+
+  describe 'report of students without check ins' do
+    
+    it "finds students without check ins using the search params in the request" do
+      CheckIn.should_receive(:search_by_course).with('from', 'to', 1, 1)
+
+      get :index, from: 'from', to: 'to', school_id: 1, report: 2, course: 1
+    end
+  end 
 
 end

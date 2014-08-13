@@ -21,8 +21,10 @@ module Api
 
       end
 
+      p user.to_s
+      p params[:school_id]
       checkIn = CheckIn.where(user_id: user.id, school_id: params[:school_id]).last
-
+      p checkIn
       unless checkIn.nil?
 
         if (checkIn.course_id == params[:course_id].to_i) and (not respects_time_interval_for_same_course checkIn)

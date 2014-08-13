@@ -66,7 +66,6 @@ describe Api::CheckInsController do
         post_to_create
         expect(response.status).to eq(401)
       end
-
     end
 
     context 'check in with a pin' do
@@ -90,6 +89,20 @@ describe Api::CheckInsController do
         post_to_create(pin: pin)
 
         expect(response.status).to eq(401)
+      end
+
+      it "s/he should not be able to check in to the same course" do
+        user = FactoryGirl.create(:user)
+        school = FactoryGirl.create(:school)
+        course = FactoryGirl.create(:course)
+        checkin = CheckIn.new(course: course, user: user, school: school)
+        checkin.save
+        controller.stub(:current_user) { user }
+
+        params = {format: :json, auth_token: 'some auth token', school_id: school.id, course_id: course.id}
+        post :create, params
+        
+        JSON.parse(response.body)['success'].should be_false
       end
 
 
