@@ -12,6 +12,7 @@ Course.create(name: "Archery", school_id: winterfell.id)
 
 # Teacher user
 User.create(email: "adamleystrnad@nightingale.org", password: "1234", password_confirmation: "1234", pin: '1234', firstname: "Alexandra", lastname: "Damley-Strnad", is_teacher: true, is_admin: true, school_id: nightingale.id)
+User.create(email: "grgarcia@nightingale.org", password: "1234", password_confirmation: "1234", pin: '1234', firstname: "Graciela", lastname: "Garcia", is_teacher: true, is_admin: true, school_id: nightingale.id)
 
 User.create(email: "dumbledore@test.com", password: "test", password_confirmation: "test", pin: 'dumb', firstname: "Albus", lastname: "Dumbledore", is_teacher: true, is_admin: false, school_id: hogwarts.id)
 User.create(email: "severus@test.com",    password: "test", password_confirmation: "test", pin: 'seve', firstname: "Severus", lastname: "Snape", is_teacher: true, is_admin: false, school_id: hogwarts.id)
